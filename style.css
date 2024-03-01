@@ -312,7 +312,7 @@ section {
     height: 400px;
     width: 400px;
     margin: auto 0;
-    
+
 }
 
 /* EXPERIENCE SECTION */
@@ -431,6 +431,7 @@ footer {
 footer p {
     text-align: center;
 }
+
 .CookieMessage {
     position: fixed;
     bottom: 0;
@@ -440,7 +441,7 @@ footer p {
     z-index: 999;
     display: none;
 }
-  
+
 .CookieMessage-content {
     color: white;
     max-width: 900px;
@@ -450,13 +451,15 @@ footer p {
     line-height: 1.5;
     font-size: 12px;
 }
-.CookieMessage-content a{
+
+.CookieMessage-content a {
     color: white;
 }
-.CookieMessage-content p{
+
+.CookieMessage-content p {
     margin: 0 0 20px 0;
 }
-  
+
 .CookieMessage-button {
     background: #00C2FF;
     display: inline-block;
@@ -464,8 +467,9 @@ footer p {
     padding: 5px 20px;
     border-radius: 5px;
     text-transform: uppercase;
-  
+
 }
-.CookieMessage-button:hover{
+
+.CookieMessage-button:hover {
     background: #5cd9ff;
 }
