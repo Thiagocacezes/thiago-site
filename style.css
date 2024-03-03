@@ -52,7 +52,7 @@ a {
 }
 
 a:hover {
-    color: grey;
+    color: rgb(128, 128, 128);
     text-decoration: underline;
     text-underline-offset: 1rem;
     text-decoration-color: rgb(181, 181, 181);
@@ -63,7 +63,8 @@ a:hover {
 }
 
 .logo:hover {
-    cursor: default;
+    cursor: pointer;
+    color: rgb(128, 128, 128);
 }
 
 /* HAMBURGER MENU */
@@ -283,10 +284,12 @@ section {
     display: flex;
 }
 
-.about-pic {
-    border-radius: 3rem;
+#about-pic {
+    border-radius: none;
 }
-
+.about-pic {
+    border-radius: 1.5rem;
+}
 .arrow {
     position: absolute;
     right: -5rem;
