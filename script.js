@@ -1,9 +1,4 @@
-function toggleMenu() {
-    const menu = document.querySelector(".menu-links");
-    const icon = document.querySelector(".hamburger-icon");
-    menu.classList.toggle("open");
-    icon.classList.toggle("open");
-}
+
 if (!localStorage.getItem("cookiesAccepted")) {
     var cookieMessage = document.getElementById('cookie-notification');
     var closeCookie = document.getElementById('cookie-notification-close');
@@ -15,4 +10,10 @@ if (!localStorage.getItem("cookiesAccepted")) {
 
         cookieMessage.style.display = 'none';
     });
+}
+function toggleMenu() {
+    const menu = document.querySelector(".menu-links");
+    const icon = document.querySelector(".hamburger-icon");
+    menu.classList.toggle("open");
+    icon.classList.toggle("open");
 }
