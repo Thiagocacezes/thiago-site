@@ -441,7 +441,7 @@ footer p {
     bottom: 0;
     left: 0;
     right: 0;
-    background: #000000;
+    background: #0c0c0c;
     z-index: 999;
     display: none;
 }
@@ -457,12 +457,13 @@ footer p {
 }
 
 .CookieMessage-content a {
-    color: white;
+    font-size: 18px;
+    color: rgb(255, 255, 255);
 }
 
 .CookieMessage-content p {
     margin: 0 0 20px 0;
-    color: rgb(226, 226, 226);
+    color: rgb(197, 197, 197);
 }
 
 .CookieMessage-button {
