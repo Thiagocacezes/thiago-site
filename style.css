@@ -435,54 +435,13 @@ footer {
 footer p {
     text-align: center;
 }
+
 .CookieMessage {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    background: #121212;
-    z-index: 999;
-    display: none;
-}
-
-.CookieMessage-content {
-    color: white;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: sans-serif;
-    line-height: 1.5;
-    font-size: 14px;
-}
-
-.CookieMessage-content a {
-    color: #00C2FF;
-}
-
-.CookieMessage-content p {
-    margin: 0 0 20px;
-}
-
-.CookieMessage-button {
-    background: #00C2FF;
-    color: white;
-    display: inline-block;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-transform: uppercase;
-    transition: background 0.3s ease;
-}
-
-.CookieMessage-button:hover {
-    background: #5cd9ff;
-}
-/*.CookieMessage {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #121212;
+    background: #363636;
     z-index: 999;
     display: none;
 }
@@ -517,4 +476,4 @@ footer p {
 
 .CookieMessage-button:hover {
     background: #5cd9ff;
-}*/
+}
