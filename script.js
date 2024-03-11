@@ -1,5 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
     var cookieMessage = document.getElementById('cookie-notification');
+
+    // Exibir o aviso de cookies
+    cookieMessage.style.display = 'block';
+});
+/*document.addEventListener("DOMContentLoaded", function () {
+    var cookieMessage = document.getElementById('cookie-notification');
     var closeCookie = document.getElementById('cookie-notification-close');
 
     // Exibir o aviso de cookies
@@ -18,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Se os cookies foram aceitos anteriormente, ocultar o aviso
         cookieMessage.style.display = 'none';
     }
-});
+});*/
 /*if (!localStorage.getItem("cookiesAccepted")) {
     var cookieMessage = document.getElementById('cookie-notification');
     var closeCookie = document.getElementById('cookie-notification-close');
