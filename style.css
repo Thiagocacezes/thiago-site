@@ -454,7 +454,8 @@ footer p {
     margin: 0 auto;
     font-family: Arial, sans-serif; /* Alterado para uma fonte mais comum */
     line-height: 1.6;
-    border: 2px solid black;
+    border: 2px solid #5cd9ff;
+    
 }
 
 .CookieMessage-content a {
