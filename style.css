@@ -445,7 +445,7 @@ footer p {
     z-index: 999;
     display: none;
     padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7); 
 }
 
 .CookieMessage-content {
@@ -473,9 +473,8 @@ footer p {
     text-decoration: none;
     padding: 8px 20px;
     border-radius: 5px;
-    text-transform: uppercase;
     color: #fff;
-    /*font-weight: bold; */
+    font-weight: bold; 
     transition: background 0.3s; 
 }
 
