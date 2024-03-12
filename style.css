@@ -445,26 +445,26 @@ footer p {
     z-index: 999;
     display: none;
     padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Adiciona uma sombra sutil */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
 }
 
 .CookieMessage-content {
     color: rgb(232, 231, 231);
     max-width: 900px;
     margin: 0 auto;
-    font-family: Arial, sans-serif; /* Alterado para uma fonte mais comum */
+    font-family: Arial, sans-serif; 
     line-height: 1.6;
-    border: 2px solid #5cd9ff;
+    
     
 }
 
 .CookieMessage-content a {
     color: #fff;
-    text-decoration: underline; /* Adiciona sublinhado aos links */
+    text-decoration: underline; 
 }
 
 .CookieMessage-content p {
-    margin: 0 0 10px; /* Reduzido o espaçamento entre os parágrafos */
+    margin: 0 0 10px; 
 }
 
 .CookieMessage-button {
@@ -475,8 +475,8 @@ footer p {
     border-radius: 5px;
     text-transform: uppercase;
     color: #fff;
-    font-weight: bold; /* Adiciona negrito ao texto do botão */
-    transition: background 0.3s; /* Adiciona uma transição suave */
+    font-weight: bold; 
+    transition: background 0.3s; 
 }
 
 .CookieMessage-button:hover {
