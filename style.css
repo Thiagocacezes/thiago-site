@@ -475,7 +475,7 @@ footer p {
     border-radius: 5px;
     text-transform: uppercase;
     color: #fff;
-    font-weight: bold; 
+    /*font-weight: bold; */
     transition: background 0.3s; 
 }
 
