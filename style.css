@@ -449,11 +449,12 @@ footer p {
 }
 
 .CookieMessage-content {
-    color: white;
+    color: rgb(232, 231, 231);
     max-width: 900px;
     margin: 0 auto;
     font-family: Arial, sans-serif; /* Alterado para uma fonte mais comum */
     line-height: 1.6;
+    border: 2px solid black;
 }
 
 .CookieMessage-content a {
