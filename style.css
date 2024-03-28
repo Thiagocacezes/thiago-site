@@ -158,6 +158,7 @@ section {
 
 .section-container {
     display: flex;
+   
 }
 
 
@@ -167,6 +168,7 @@ section {
     justify-content: center;
     gap: 5rem;
     height: 80vh;
+    
 }
 
 .section__pic-container {
@@ -174,6 +176,7 @@ section {
     height: 400px;
     width: 400px;
     margin: auto 0;
+    
 }
 
 .section__text {
@@ -284,11 +287,12 @@ section {
 }
 
 #about-pic {
-    border-radius: none;
+    border-radius: 10px;
 }
 
 .about-pic {
     border-radius: 1.5rem;
+    
 }
 
 .arrow {
@@ -316,6 +320,7 @@ section {
     height: 400px;
     width: 400px;
     margin: auto 0;
+    
 
 }
 
