@@ -213,7 +213,7 @@ section {
 
 .icon {
     cursor: pointer;
-    height: 2rem;
+    height: 3rem;
 }
 
 
@@ -244,8 +244,8 @@ section {
 
 .btn-color-1,
 .btn-color-2:hover {
-    background: rgb(53, 53, 53);
-    color: white;
+    background: #00804b;
+    color: rgb(0, 0, 0);
 }
 
 .btn-color-1:hover {
@@ -465,12 +465,12 @@ footer p {
 }
 
 .aviso-de-cookies__conteudo a {
-    color: #00c1fc;
+    color: #00804b;
     text-decoration: none;
 }
 
 .aviso-de-cookies__botao {
-    background-color: #00C2FF;
+    background-color: #00804b;
     padding: 8px 20px;
     border-radius: 5px;
     color: #fff;
@@ -481,7 +481,7 @@ footer p {
 }
 
 .aviso-de-cookies__botao:hover {
-    background-color: #5cd9ff;
+    background-color: #00804b;
 }
 
 /*.CookieMessage {
