@@ -1,655 +1,373 @@
 <!DOCTYPE html>
 <html lang="pt">
 
-    <head>
-        <meta name="description"
-            content="Site com foco no desenvolvimento, voltado ao web developer, desing, marketing digital e criaçao de sites.">
-        <meta name="author" content="Thiago Cacezes">
-        <meta name="keywords"
-            content="Thiago Cacezes, thiagocacezes.com, www.tcdigital.pt, tcdigital, programação, html, css, tcdigital, js, php, tcdigital, tcdigital.pt, programador web, sites, construção de sites, Brasil, Consultoria, Marketing digital">
-        <meta name="robots" content="index,nofollow">
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Thiago Cacezes Front-End developer web</title>
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="mediaquery.css">
-    </head>
+<head>
+    <meta name="description"
+        content="Site com foco no desenvolvimento, voltado ao web developer, desing, marketing digital e criaçao de sites.">
+    <meta name="author" content="Thiago Cacezes">
+    <meta name="keywords"
+        content="Thiago Cacezes, thiagocacezes.com, www.tcdigital.pt, tcdigital, programação, html, css, tcdigital, js, php, tcdigital, tcdigital.pt, programador web, sites, construção de sites, Brasil, Consultoria, Marketing digital">
+    <meta name="robots" content="index,nofollow">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiago Cacezes Front-End developer web</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-    <body>
-        <header>
-            <nav id="desktop-nav">
-                <div class="logo">Sejam Bem Vindos...</div>
-                <div>
-                    <ul class="nav-links">
-                        <li><a href="#about">Sobre</a></li>
-                        <li><a href="#experience">Experiência</a></li>
-                        <li><a href="#projects">Projetos</a></li>
-                        <li><a href="#contact">Contato</a></li>
-                    </ul>
+<body data-theme="light" class="is-loading">
+
+    <!-- loader de entrada -->
+    <div class="loader" id="loader">
+        <div class="loader__mark">&lt;<span>TC</span>/&gt;</div>
+        <div class="loader__bar"><div class="loader__bar-fill" id="loaderFill"></div></div>
+        <div class="loader__pct" id="loaderPct">0%</div>
+    </div>
+
+    <!-- cursor customizado -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- fundo -->
+    <canvas id="particles-canvas"></canvas>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <!-- barra de progresso do scroll -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <header>
+        <nav id="desktop-nav">
+            <div class="logo">&lt;<b>TC</b>/&gt;&nbsp;dev</div>
+            <div>
+                <ul class="nav-links">
+                    <li><a href="#about">Sobre</a></li>
+                    <li><a href="#experience">Experiência</a></li>
+                    <li><a href="#projects">Projetos</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </div>
+            <div class="nav-extra">
+                <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">🌙</button>
+                <a class="nav-cta" href="#contact">fale comigo</a>
+            </div>
+        </nav>
+        <nav id="hamburger-nav">
+            <div class="logo">&lt;<b>TC</b>/&gt;</div>
+            <div class="hamburger-menu">
+                <button class="theme-toggle" id="themeToggleMobile" aria-label="Alternar tema">🌙</button>
+                <div class="hamburger-icon" onclick="toggleMenu()">
+                    <span></span><span></span><span></span>
                 </div>
-            </nav>
-            <nav id="hamburger-nav">
-                <div class="logo">Bem Vindos...</div>
-                <div class="hamburger-menu">
-                    <div class="hamburger-icon" onclick="toggleMenu()">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <div class="menu-links">
-                        <li><a href="#about"
-                                onclick="toggleMenu()">Sobre</a></li>
-                        <li><a href="#experience"
-                                onclick="toggleMenu()">Experiência</a></li>
-                        <li><a href="#projects"
-                                onclick="toggleMenu()">Projetos</a></li>
-                        <li><a href="#contact"
-                                onclick="toggleMenu()">Contato</a></li>
-                    </div>
-                </div>
-            </nav>
-        </header>
-        <main>
-            <section id="profile">
-                <div class="section__pic-container">
-                    <img src="./assets/nTb4bdPmT0SZjDNgk6YAZA.png"
-                        alt="thiago cacezes profile picture"
-                        id="about-pic" />
-                </div>
-                <div class="section__text">
-                    <p class="section__text__p1"></p>
-                    <h1 class="title">Thiago Cacezes</h1>
-                    <p class="section__text__p2">Front-End Web Developer
-                        Specialist</p>
-                    <div class="btn-container">
-                        <button class="btn btn-color-2"
-                            onclick="window.open('./assets/IMG_8444.jpg')">
-
-                            Certificado Profissional
-                        </button>
-                        <button class="btn btn-color-2"
-                            onclick="location.href='https://www.credly.com/users/thiago-cacezes/'">
-                            <img src="./assets/t2.png" alt class="project-img">
-                        </button>
-                    </div>
-                    <div id="socials-container">
-
-                        <img src="./assets/github.png" alt="My Github profile"
-                            class="icon"
-                            onclick="location.href='https://github.com/Thiagocacezes'" />
-                        <img src="./assets/Credly-187x187.png"
-                            alt="My Credly profile" class="icon"
-                            onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-
-                    </div>
-                </div>
-            </section>
-            <section id="about">
-                <p class="section__text__p1">Saiba Mais</p>
-                <h1 class="title">Sobre Mim</h1>
-                <div class="section-container">
-                    <div class="section__pic-container">
-                        <img
-                            src="./assets/IMG_5518.jpeg"
-                            alt="tcdigital picture" class="about-pic" />
-                    </div>
-                    <div class="about-details-container">
-                        <div class="about-containers">
-                            <div class="details-container">
-                                <img src="./assets/t2.png"
-                                    alt=" icon"
-                                    class="icon about-pic"
-                                    onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-                                <h3>Agência TCDigital.pt</h3>
-                                <p>Agência de<br />Produtos Web!</p>
-                            </div>
-                            <div class="details-container">
-                                <img src="./assets/front.png"
-                                    alt=" icon" class="icon"
-                                    onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-                                <h3>Formação</h3>
-                                <p>Flag Academy Lisboa-Portugal<br />Front-End
-                                    Web Develper Specialist
-                                </div>
-                            </div>
-
-                            <div class="text-container">
-                                <p>
-                                    As a web artist, weaving codes and colors to
-                                    create engaging digital experiences, my
-                                    journey began in vibrant Lisbon,
-                                    where I graduated from Flag academy. With
-                                    two years of practice, I turned pixels into
-                                    masterpieces,
-                                    blending my passion for design with sharp
-                                    technical skills. I am a digital dream
-                                    architect,
-                                    shaping the future of the web with every
-                                    line of code and stroke of creativity.
-                                </p>
-                                <br>
-                                <br>
-                                <p>
-                                    Como um artista da web, tecendo códigos e
-                                    cores para criar experiências digitais
-                                    cativantes,
-                                    minha jornada começou na vibrante Lisboa,
-                                    onde me graduei na academia Flag.
-                                    Com dois anos de prática, transformei pixels
-                                    em obras-primas, misturando minha paixão por
-                                    design com habilidades técnicas afiadas.
-                                    Sou um arquiteto de sonhos digitais,
-                                    moldando o futuro da web com cada linha de
-                                    código e pincelada de criatividade.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="./assets/arrow.png" alt="Arrow icon"
-                        class="icon arrow"
-                        onclick="location.href='./#experience'" />
-                </section>
-                <section id="experience">
-                    <p class="section__text__p1">Explore minha </p>
-                    <h1 class="title">Jornada no Desenvolvimento Digital</h1>
-                    <div class="experience-details-container">
-                        <div class="about-containers">
-                            <div class="details-container">
-                                <h2 class="experience-sub-title">Front-End
-                                    Development</h2>
-                                <div class="article-container">
-                                    <a
-                                        href="https://www.credly.com/users/thiago-cacezes/"><article>
-                                            <img src="./assets/htnl.png"
-                                                alt="Experience icon"
-                                                class="icon" />
-                                            <div>
-                                                <h3>HTML</h3>
-                                                <p>Experienced</p>
-                                            </div>
-                                        </article></a>
-                                    <a href="https://www.credly.com/users/thiago-cacezes/"><article>
-                                        <img src="./assets/htnl.png"
-                                            alt="Experience icon"
-                                            class="icon"
-                                            onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-                                        <div>
-                                            <h3>CSS</h3>
-                                            <p>Experienced</p>
-                                        </div>
-                                    </article></a>
-                                    <a href="https://www.credly.com/users/thiago-cacezes/"><article>
-                                        <img src="./assets/htnl.png"
-                                            alt="Experience icon"
-                                            class="icon"
-                                            onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-                                        <div>
-                                            <h3>SASS</h3>
-                                            <p>Experienced</p>
-                                        </div>
-                                    </article></a>
-                                    <a href="https://www.credly.com/users/thiago-cacezes/"><article>
-                                        <img src="./assets/htnl.png"
-                                            alt="Experience icon"
-                                            class="icon"
-                                            onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-                                        <div>
-                                            <h3>JavaScript</h3>
-                                            <p>Experienced</p>
-                                        </div>
-                                    </article></a>
-                                    <a href="https://www.credly.com/users/thiago-cacezes/"><article>
-                                        <img src="./assets/htnl.png"
-                                            alt="Experience icon"
-                                            class="icon"
-                                            onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-                                        <div>
-                                            <h3>React</h3>
-                                            <p>Experienced</p>
-                                        </div>
-                                    </article></a>
-                                    <a href="https://www.credly.com/users/thiago-cacezes/"><article>
-                                        <img src="./assets/htnl.png"
-                                            alt="Experience icon"
-                                            class="icon"
-                                            onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-                                        <div>
-                                            <h3>Metodologia: Scrum</h3>
-                                            <p>Experienced</p>
-                                        </div>
-                                    </article></a>
-                                    <a href="https://www.credly.com/users/thiago-cacezes/"><article>
-                                        <img
-                                            src="./assets/front.png"
-                                            alt="Experience icon"
-                                            class="icon"
-                                            onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-                                        <div>
-                                            <h3>Front-End Developer
-                                                Specialist</h3>
-                                            <p>Experienced</p>
-                                        </div>
-                                    </article></a>
-                                </div>
-                            </div>
-
-                            <div class="details-container">
-                                <h2 class="experience-sub-title">BacK-End
-                                    Development</h2>
-                                <div class="article-container">
-                                    <a href="https://www.credly.com/users/thiago-cacezes/"><article>
-                                        <img src="./assets/htnl.png"
-                                            alt="Experience icon"
-                                            class="icon"
-                                            onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-                                        <div>
-                                            <h3>Estruturação de Dados</h3>
-                                            <p>Experienced</p>
-                                        </div>
-                                    </article></a>
-                                    <a href="https://www.credly.com/users/thiago-cacezes/"><article>
-                                        <img src="./assets/htnl.png"
-                                            alt="Experience icon"
-                                            class="icon"
-                                            onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-                                        <div>
-                                            <h3>Data Base MySQL</h3>
-                                            <p>Experienced</p>
-                                        </div>
-                                    </article></a>
-                                    <a href="https://www.credly.com/users/thiago-cacezes/"><article>
-                                        <img src="./assets/htnl.png"
-                                            alt="Experience icon"
-                                            class="icon"
-                                            onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-                                        <div>
-                                            <h3>PHP</h3>
-                                            <p>Experienced</p>
-                                        </div>
-                                    </article></a>
-                                    <a href="https://www.credly.com/users/thiago-cacezes/"><article>
-                                        <img src="./assets/htnl.png"
-                                            alt="Experience icon"
-                                            class="icon"
-                                            onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-                                        <div>
-                                            <h3>Laravel</h3>
-                                            <p>Experienced</p>
-                                        </div>
-                                    </article></a>
-                                    <a href="https://www.credly.com/users/thiago-cacezes/"><article>
-                                        <img src="./assets/htnl.png"
-                                            alt="Experience icon"
-                                            class="icon"
-                                            onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-                                        <div>
-                                            <h3>Creating REST API`S</h3>
-                                            <p>Experienced</p>
-                                        </div>
-                                    </article></a>
-                                    <a href="https://www.credly.com/users/thiago-cacezes/"><article>
-                                        <img src="./assets/htnl.png"
-                                            alt="Experience icon"
-                                            class="icon"
-                                            onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-                                        <div>
-                                            <h3>NodeJS + ExpressJS</h3>
-                                            <p>Experienced</p>
-                                        </div>
-                                    </article></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="./assets/arrow.png" alt="Arrow icon"
-                        class="icon arrow"
-                        onclick="location.href='./#missao'" />
-                </section>
-                <br>
-                <section id="experience">
-                    <p class="section__text__p1">Apendizado Contínuo</p>
-                    <h1 class="title">MasterClasses</h1>
-                    <div class="experience-details-container">
-                        <div class="about-containers">
-                            <div class="details-container">
-                                <h2 class="experience-sub-title"></h2>
-                                <div class="article-container">
-                                    <article>
-                                        <img src="./assets/mas7.png"
-                                            alt="Experience icon"
-                                            class="icon"
-                                            onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-                                        <div>
-                                            <h3>ChatGPT-Increase your productivity with AI</h3>
-                                            <p>Rumos</p>
-                                        </div>
-                                    </article>
-                                    <article>
-                                        <img src="./assets/mas6.png"
-                                            alt="Experience icon"
-                                            class="icon"
-                                            onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-                                        <div>
-                                            <h3>Strategic Personal Branding</h3>
-                                            <p>Rumos</p>
-                                        </div>
-                                    </article>
-                                    <article>
-                                        <img src="./assets/mas2.png"
-                                            alt="Experience icon"
-                                            class="icon"
-                                            onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-                                        <div>
-                                            <h3>Product Design Process &
-                                                Documentation</h3>
-                                            <p>Flag</p>
-                                        </div>
-                                    </article>
-                                    <article>
-                                        <img src="./assets/mas3.png"
-                                            alt="Experience icon"
-                                            class="icon"
-                                            onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-                                        <div>
-                                            <h3>Timelapse: a creative
-                                                technique</h3>
-                                            <p>Flag</p>
-                                        </div>
-                                    </article>
-                                    <article>
-                                        <img src="./assets/mas4.png"
-                                            alt="Experience icon"
-                                            class="icon"
-                                            onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-                                        <div>
-                                            <h3>Design beyond Aesthetics</h3>
-                                            <p>Flag</p>
-                                        </div>
-                                    </article>
-                                    <article>
-                                        <img src="./assets/mas5.png"
-                                            alt="Experience icon"
-                                            class="icon"
-                                            onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-                                        <div>
-                                            <h3>Visual identity & Logo</h3>
-                                            <p>Flag</p>
-                                        </div>
-                                    </article>
-                                    <article>
-                                        <img src="./assets/mas6.png"
-                                            alt="Experience icon"
-                                            class="icon"
-                                            onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-                                        <div>
-                                            <h3>Strengthen data security with Azure Key Vault</h3>
-                                            <p>Flag</p>
-                                        </div>
-                                    </article>
-                                    <article>
-                                        <img src="./assets/mas8.png"
-                                            alt="Experience icon"
-                                            class="icon"
-                                            onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-                                        <div>
-                                            <h3>The Transformative Power of Cinema in the Communities</h3>
-                                            <p>Flag</p>
-                                        </div>
-                                    </article>
-                                    <article>
-                                        <img src="./assets/mas9.png"
-                                            alt="Experience icon"
-                                            class="icon"
-                                            onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-                                        <div>
-                                            <h3>Curiosity, that incredible tool</h3>
-                                            <p>Flag</p>
-                                        </div>
-                                    </article>
-                                    <article>
-                                        <img src="./assets/mas10.png"
-                                            alt="Experience icon"
-                                            class="icon"
-                                            onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-                                        <div>
-                                            <h3>Combine Humor with Content Marketing</h3>
-                                            <p>Flag</p>
-                                        </div>
-                                    </article>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="./assets/arrow.png" alt="Arrow icon"
-                        class="icon arrow"
-                        onclick="location.href='./#projects'" />
-                </section>
-                <section id="missao">
-                    <p class="section__text__p1">Minha</p>
-                    <h1 class="title">Missão</h1>
-                    <div class="experience-details-container">
-                        <div class="about-containers">
-                            <div class="details-container">
-
-                                <div class="article-container">
-
-                                    "Na vanguarda da criação
-                                    digital, minha missão é
-                                    transformar visões em realidade
-                                    virtual,
-                                    tecendo uma tapeçaria de
-                                    inovação e beleza
-                                    através do design front-end.
-                                    Como um artesão
-                                    digital,
-                                    cada projeto é uma jornada
-                                    emocionante, onde
-                                    fusiono minha paixão pelo design
-                                    com a precisão
-                                    técnica,
-                                    moldando experiências que
-                                    transcendem o comum.
-                                    Meu compromisso
-                                    é ir além das
-                                    expectativas,
-                                    entregando não apenas produtos,
-                                    mas obras de
-                                    arte digitais que inspiram,
-                                    encantam e deixam
-                                    uma marca duradoura.
-                                    Minha missão é não apenas criar
-                                    sites, mas sim
-                                    abrir portais para novas
-                                    experiências, elevando
-                                    a estética e
-                                    funcionalidade para um novo
-                                    padrão de
-                                    excelência. Em cada linha de
-                                    código, em cada
-                                    pixel, busco não apenas
-                                    satisfazer,
-                                    mas encantar e surpreender,
-                                    redefinindo os
-                                    limites do possível e elevando a
-                                    barra para o
-                                    que é esperado no mundo digital.
-                                    Sou um arquiteto de sonhos, um
-                                    alquimista do
-                                    digital, e minha missão é
-                                    transformar visões em
-                                    realidade, uma linha de código
-                                    de cada vez."
-                                    <h2
-                                        class="experience-sub-title">Thiago
-                                        Cacezes</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="./assets/arrow.png" alt="Arrow icon"
-                        class="icon arrow"
-                        onclick="location.href='./#projects'" />
-                </section>
-
-                <section id="projects">
-                    <p class="section__text__p1">Sobre minhas </p>
-                    <h1 class="title">Atuações</h1>
-                    <div class="experience-details-container">
-                        <div class="about-containers">
-                            <div
-                                class="details-container color-container">
-                                <div class="article-container">
-                                    <img
-                                        src="./assets/t2.png"
-                                        alt="Project 1"
-                                        class="project-img" />
-                                </div>
-                                <h2
-                                    class="experience-sub-title project-title">Sites</h2>
-                                <div class="btn-container">
-                                    <button
-                                        class="btn btn-color-2 project-btn"
-                                        onclick="location.href='https://thiagocacezes.github.io/tcdigital/'">
-                                        <img
-                                            src="./assets/t2.png"
-                                            alt="Project 1"
-                                            class="project-img" />
-
-                                    </button>
-                                    <button
-                                        class="btn btn-color-2 project-btn"
-                                        onclick="location.href='https://thiagocacezes.github.io/tcdigital/'">
-                                        TCDigital.pt
-                                    </button>
-                                </div>
-                            </div>
-                            <div
-                                class="details-container color-container">
-                                <div class="article-container">
-                                    <img src="./assets/t2.png"
-                                        alt="Project 2"
-                                        class="project-img" />
-                                </div>
-                                <h2
-                                    class="experience-sub-title project-title">Consultoria</h2>
-                                <div class="btn-container">
-                                    <button
-                                        class="btn btn-color-2 project-btn"
-                                        onclick="location.href='https://thiagocacezes.github.io/tcdigital/'">
-                                        <img
-                                            src="./assets/t2.png"
-                                            alt="Project 1"
-                                            class="project-img" />
-                                    </button>
-                                    <button
-                                        class="btn btn-color-2 project-btn"
-                                        onclick="location.href='https://thiagocacezes.github.io/tcdigital/'">
-                                        TCDigital.pt
-                                    </button>
-                                </div>
-                            </div>
-                            <div
-                                class="details-container color-container">
-                                <div class="article-container">
-                                    <img src="./assets/t2.png"
-                                        alt="Project 3"
-                                        class="project-img" />
-                                </div>
-                                <h2
-                                    class="experience-sub-title project-title">Marketing
-                                    Digital</h2>
-                                <div class="btn-container">
-                                    <button
-                                        class="btn btn-color-2 project-btn"
-                                        onclick="location.href='https://thiagocacezes.github.io/tcdigital/'">
-                                        <img
-                                            src="./assets/t2.png"
-                                            alt="Project 1"
-                                            class="project-img" />
-                                    </button>
-                                    <button
-                                        class="btn btn-color-2 project-btn"
-                                        onclick="location.href='https://thiagocacezes.github.io/tcdigital/'">
-                                        TCDigital.pt
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="./assets/arrow.png" alt="Arrow icon"
-                        class="icon arrow"
-                        onclick="location.href='./#contact'" />
-                </section>
-                <section id="contact">
-                    <p class="section__text__p1">Para mais
-                        informações</p>
-                    <h1 class="title">Contate-me</h1>
-                    <div class="contact-info-upper-container">
-                        <div class="contact-info-container">
-                            <img src="./assets/email.png"
-                                alt="Email icon"
-                                class="icon contact-icon email-icon" />
-                            <p><a
-                                    href="mailto:thiagocacezes@tcdigital.pt">thiagocacezes@tcdigital.pt</a></p>
-                        </div>
-                        <div class="contact-info-container">
-                            <img src="./assets/t2.png"
-                                alt="tcdigital icon"
-                                class="icon contact-icon" />
-                            <button
-                                class="btn btn-color-2 project-btn"
-                                onclick="location.href='https://thiagocacezes.github.io/tcdigital/'">
-                                TCDigital.pt
-                            </button>
-                            <!--<p><a location.href='https://api.whatsapp.com/send?phone=+351933056037&text=Ol%C3%A1%2C%20gostaria%20de%20entrar%20em%20contato%20com%20voc%C3%AA.'>Whatsapp</a></p>-->
-                        </div>
-                    </div>
-                </section>
-            </main>
-            <footer>
-                <nav>
-                    <div class="nav-links-container">
-                        <ul class="nav-links">
-                            <li><a href="#about">Sobre</a></li>
-                            <li><a
-                                    href="#experience">Experiência</a></li>
-                            <li><a
-                                    href="#projects">Projetos</a></li>
-                            <li><a href="#contact">Contato</a></li>
-                        </ul>
-                    </div>
-                </nav>
-                <p>Copyright &#169; 2024 Thiago Cacezes. All Rights
-                    Reserved.</p>
-            </footer>
-            <!--aviso de cookies-->
-            <div id="aviso-de-cookies" class="aviso-de-cookies">
-                <div class="aviso-de-cookies__conteudo">
-                    <p>Este site utiliza cookies de navegação para melhorar a
-                        experiência do usuário. <a
-                            href="./polPivacidade.html">Saiba
-                            mais</a></p>
-                    <br>
-                    <button id="aviso-de-cookies-fechar"
-                        class="aviso-de-cookies__botao">Ok, entendi!</button>
+                <div class="menu-links">
+                    <li><a href="#about" onclick="toggleMenu()">Sobre</a></li>
+                    <li><a href="#experience" onclick="toggleMenu()">Experiência</a></li>
+                    <li><a href="#projects" onclick="toggleMenu()">Projetos</a></li>
+                    <li><a href="#contact" onclick="toggleMenu()">Contato</a></li>
                 </div>
             </div>
+        </nav>
+    </header>
 
-            <script src="script.js"></script>
-            <!--<script
-                src="https://dashboard.chatfuel.com/integration/landing-wa-widget.js"
-                async defer data-prefilled="Olá" data-welcome="Olá"
-                data-phone="+351933056037">
-            </script>-->
-            <link rel="stylesheet"
-                href="https://cdn.positus.global/production/resources/robbu/whatsapp-button/whatsapp-button.css">
-            <a id="robbu-whatsapp-button" target="_blank"
-                href="https://api.whatsapp.com/send?phone=351933056037&text=Ol%C3%A1!">
-                <div class="rwb-tooltip">Fale Conosco!</div> <img
-                    src="https://cdn.positus.global/production/resources/robbu/whatsapp-button/whatsapp-icon.svg">
-            </a>
+    <!-- navegação lateral por pontos -->
+    <nav class="dot-nav" id="dotNav">
+        <div class="dot-nav__line"></div>
+        <button class="dot-nav__item" data-target="#profile"><span class="dot-tooltip">Início</span></button>
+        <button class="dot-nav__item" data-target="#about"><span class="dot-tooltip">Sobre</span></button>
+        <button class="dot-nav__item" data-target="#experience"><span class="dot-tooltip">Experiência</span></button>
+        <button class="dot-nav__item" data-target="#masterclasses"><span class="dot-tooltip">MasterClasses</span></button>
+        <button class="dot-nav__item" data-target="#missao"><span class="dot-tooltip">Missão</span></button>
+        <button class="dot-nav__item" data-target="#projects"><span class="dot-tooltip">Projetos</span></button>
+        <button class="dot-nav__item" data-target="#contact"><span class="dot-tooltip">Contato</span></button>
+    </nav>
 
-        </body>
+    <main>
+        <section id="profile">
+            <div class="section__pic-container" id="heroPic">
+                <div class="pic-glow"></div>
+                <div class="pic-frame"></div>
+                <img src="./assets/nTb4bdPmT0SZjDNgk6YAZA.png" alt="thiago cacezes profile picture" id="about-pic" />
+                <div class="pic-tag"><i>●</i>&nbsp; disponível para projetos</div>
+            </div>
+            <div class="section__text">
+                <span class="eyebrow">portfólio // front-end developer</span>
+                <h1 class="title--hero"><span class="static-part">Thiago</span> Cacezes</h1>
+                <p class="hero-role"><span id="roleText"></span><span class="cursor-blink"></span></p>
+                <div class="btn-container">
+                    <button class="btn btn-color-1 magnetic" onclick="window.open('./assets/IMG_8444.jpg')">
+                        Certificado Profissional
+                    </button>
+                    <button class="btn btn-color-2 magnetic" onclick="location.href='https://www.credly.com/users/thiago-cacezes/'">
+                        <img src="./assets/t2.png" alt="" class="project-img" style="width:1.4rem;height:1.4rem;object-fit:contain;" />
+                    </button>
+                </div>
+                <div id="socials-container">
+                    <img src="./assets/github.png" alt="My Github profile" class="icon"
+                        onclick="location.href='https://github.com/Thiagocacezes'" />
+                    <img src="./assets/Credly-187x187.png" alt="My Credly profile" class="icon"
+                        onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
+                </div>
+            </div>
+        </section>
+
+        <div class="marquee reveal">
+            <div class="marquee__track" id="marqueeTrack">
+                <span class="marquee__item">HTML</span>
+                <span class="marquee__item">CSS</span>
+                <span class="marquee__item">SASS</span>
+                <span class="marquee__item">JavaScript</span>
+                <span class="marquee__item">React</span>
+                <span class="marquee__item">Node.js</span>
+                <span class="marquee__item">Express.js</span>
+                <span class="marquee__item">PHP</span>
+                <span class="marquee__item">Laravel</span>
+                <span class="marquee__item">MySQL</span>
+                <span class="marquee__item">REST API</span>
+                <span class="marquee__item">Scrum</span>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat reveal"><div class="stat__num" data-count="4">0</div><div class="stat__label">anos de experiência</div></div>
+            <div class="stat reveal reveal-delay-1"><div class="stat__num" data-count="17">0</div><div class="stat__label">tecnologias</div></div>
+            <div class="stat reveal reveal-delay-2"><div class="stat__num" data-count="23">0</div><div class="stat__label">projetos entregues</div></div>
+            <div class="stat reveal"><div class="stat__num" data-count="38">0</div><div class="stat__label">masterclasses</div></div>
+        </div>
+
+        <section id="about">
+            <span class="eyebrow reveal">// sobre mim</span>
+            <h1 class="title reveal">Sobre Mim</h1>
+            <div class="section-container">
+                <div class="about-pic-wrap reveal">
+                    <img src="./assets/IMG_5518.jpeg" alt="tcdigital picture" class="about-pic" />
+                </div>
+                <div class="about-details-container">
+                    <div class="about-containers">
+                        <div class="details-container spotlight reveal">
+                            <img src="./assets/t2.png" alt="icon" class="icon about-pic"
+                                onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
+                            <h3>Agência TCDigital.pt</h3>
+                            <p>Agência de produtos web.</p>
+                        </div>
+                        <div class="details-container spotlight reveal reveal-delay-1">
+                            <img src="./assets/front.png" alt="icon" class="icon"
+                                onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
+                            <h3>Formação</h3>
+                            <p>Flag Academy, Lisboa — Portugal.<br />Front-End Web Developer Specialist</p>
+                        </div>
+                    </div>
+                    <div class="text-container spotlight reveal reveal-delay-2">
+                        <p>
+                            As a web artist, weaving codes and colors to create engaging digital experiences, my
+                            journey began in vibrant Lisbon, where I graduated from Flag academy. With two years of
+                            practice, I turned pixels into masterpieces, blending my passion for design with sharp
+                            technical skills. I am a digital dream architect, shaping the future of the web with
+                            every line of code and stroke of creativity.
+                        </p>
+                        <p>
+                            Como um artista da web, tecendo códigos e cores para criar experiências digitais
+                            cativantes, minha jornada começou na vibrante Lisboa, onde me graduei na academia Flag.
+                            Com dois anos de prática, transformei pixels em obras-primas, misturando minha paixão por
+                            design com habilidades técnicas afiadas. Sou um arquiteto de sonhos digitais, moldando o
+                            futuro da web com cada linha de código e pincelada de criatividade.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#experience'" />
+        </section>
+
+        <section id="experience">
+            <span class="eyebrow reveal">// stack técnica</span>
+            <h1 class="title reveal">Jornada no Desenvolvimento Digital</h1>
+            <div class="experience-details-container">
+                <div class="about-containers">
+                    <div class="details-container spotlight reveal">
+                        <h2 class="experience-sub-title">front-end.js</h2>
+                        <div class="article-container">
+                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/htnl.png" alt="Experience icon" class="icon" /><div><h3>HTML</h3><p>Experienced</p></div></article></a>
+                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/htnl.png" alt="Experience icon" class="icon" /><div><h3>CSS</h3><p>Experienced</p></div></article></a>
+                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/htnl.png" alt="Experience icon" class="icon" /><div><h3>SASS</h3><p>Experienced</p></div></article></a>
+                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/htnl.png" alt="Experience icon" class="icon" /><div><h3>JavaScript</h3><p>Experienced</p></div></article></a>
+                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/htnl.png" alt="Experience icon" class="icon" /><div><h3>React</h3><p>Experienced</p></div></article></a>
+                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/htnl.png" alt="Experience icon" class="icon" /><div><h3>Metodologia: Scrum</h3><p>Experienced</p></div></article></a>
+                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/front.png" alt="Experience icon" class="icon" /><div><h3>Front-End Developer Specialist</h3><p>Experienced</p></div></article></a>
+                        </div>
+                    </div>
+                    <div class="details-container spotlight reveal reveal-delay-1">
+                        <h2 class="experience-sub-title">back-end.js</h2>
+                        <div class="article-container">
+                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/htnl.png" alt="Experience icon" class="icon" /><div><h3>Estruturação de Dados</h3><p>Experienced</p></div></article></a>
+                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/htnl.png" alt="Experience icon" class="icon" /><div><h3>Data Base MySQL</h3><p>Experienced</p></div></article></a>
+                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/htnl.png" alt="Experience icon" class="icon" /><div><h3>PHP</h3><p>Experienced</p></div></article></a>
+                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/htnl.png" alt="Experience icon" class="icon" /><div><h3>Laravel</h3><p>Experienced</p></div></article></a>
+                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/htnl.png" alt="Experience icon" class="icon" /><div><h3>Creating REST API'S</h3><p>Experienced</p></div></article></a>
+                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/htnl.png" alt="Experience icon" class="icon" /><div><h3>NodeJS + ExpressJS</h3><p>Experienced</p></div></article></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#masterclasses'" />
+        </section>
+
+        <section id="masterclasses">
+            <span class="eyebrow reveal">// aprendizado contínuo</span>
+            <h1 class="title reveal">MasterClasses</h1>
+            <div class="experience-details-container">
+                <div class="about-containers">
+                    <div class="details-container spotlight reveal">
+                        <div class="article-container">
+                            <article><img src="./assets/mas7.png" alt="Experience icon" class="icon" /><div><h3>ChatGPT - Increase your productivity with AI</h3><p>Rumos</p></div></article>
+                            <article><img src="./assets/mas6.png" alt="Experience icon" class="icon" /><div><h3>Strategic Personal Branding</h3><p>Rumos</p></div></article>
+                            <article><img src="./assets/mas2.png" alt="Experience icon" class="icon" /><div><h3>Product Design Process & Documentation</h3><p>Flag</p></div></article>
+                            <article><img src="./assets/mas3.png" alt="Experience icon" class="icon" /><div><h3>Timelapse: a creative technique</h3><p>Flag</p></div></article>
+                            <article><img src="./assets/mas4.png" alt="Experience icon" class="icon" /><div><h3>Design beyond Aesthetics</h3><p>Flag</p></div></article>
+                            <article><img src="./assets/mas5.png" alt="Experience icon" class="icon" /><div><h3>Visual identity & Logo</h3><p>Flag</p></div></article>
+                            <article><img src="./assets/mas6.png" alt="Experience icon" class="icon" /><div><h3>Strengthen data security with Azure Key Vault</h3><p>Flag</p></div></article>
+                            <article><img src="./assets/mas8.png" alt="Experience icon" class="icon" /><div><h3>The Transformative Power of Cinema in the Communities</h3><p>Flag</p></div></article>
+                            <article><img src="./assets/mas9.png" alt="Experience icon" class="icon" /><div><h3>Curiosity, that incredible tool</h3><p>Flag</p></div></article>
+                            <article><img src="./assets/mas10.png" alt="Experience icon" class="icon" /><div><h3>Combine Humor with Content Marketing</h3><p>Flag</p></div></article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#missao'" />
+        </section>
+
+        <section id="missao">
+            <span class="eyebrow reveal">// filosofia de trabalho</span>
+            <h1 class="title reveal">Missão</h1>
+            <div class="terminal reveal">
+                <div class="terminal__bar">
+                    <span class="terminal__dot terminal__dot--r"></span>
+                    <span class="terminal__dot terminal__dot--y"></span>
+                    <span class="terminal__dot terminal__dot--g"></span>
+                    <span class="terminal__file">missao.js</span>
+                </div>
+                <div class="terminal__body">
+                    <div class="terminal__lines">
+                        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                        <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span>
+                    </div>
+                    <div class="terminal__code">
+                        <span class="terminal__comment">/**</span>
+                        <span class="terminal__comment"> * Na vanguarda da criação digital, minha missão é transformar</span>
+                        <span class="terminal__comment"> * visões em realidade virtual, tecendo uma tapeçaria de inovação</span>
+                        <span class="terminal__comment"> * e beleza através do design front-end. Cada projeto é uma</span>
+                        <span class="terminal__comment"> * jornada emocionante, onde fusiono paixão pelo design com</span>
+                        <span class="terminal__comment"> * precisão técnica, moldando experiências que transcendem o comum.</span>
+                        <span class="terminal__comment"> * Meu compromisso é ir além das expectativas, entregando obras</span>
+                        <span class="terminal__comment"> * de arte digitais que inspiram, encantam e deixam uma marca</span>
+                        <span class="terminal__comment"> * duradoura — elevando a estética e a funcionalidade a um novo</span>
+                        <span class="terminal__comment"> * padrão de excelência, uma linha de código de cada vez.</span>
+                        <span class="terminal__comment"> */</span>
+                        <span><span class="kw">const</span> autor <span class="punct">=</span> <span class="str">"Thiago Cacezes"</span><span class="punct">;</span></span>
+                    </div>
+                </div>
+            </div>
+            <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#projects'" />
+        </section>
+
+        <section id="projects">
+            <span class="eyebrow reveal">// portfólio</span>
+            <h1 class="title reveal">Atuações</h1>
+            <div class="experience-details-container">
+                <div class="about-containers">
+                    <div class="details-container color-container spotlight reveal">
+                        <div class="article-container">
+                            <img src="./assets/t2.png" alt="Project 1" class="project-img" />
+                        </div>
+                        <span class="project-tag">web</span>
+                        <h2 class="project-title">Sites</h2>
+                        <div class="btn-container">
+                            <button class="btn btn-color-2 project-btn magnetic" onclick="location.href='https://thiagocacezes.github.io/tcdigital/'">
+                                <img src="./assets/t2.png" alt="Project 1" style="width:1.4rem;height:1.4rem;object-fit:contain;" />
+                            </button>
+                            <button class="btn btn-color-2 project-btn magnetic" onclick="location.href='https://thiagocacezes.github.io/tcdigital/'">TCDigital.pt</button>
+                        </div>
+                    </div>
+                    <div class="details-container color-container spotlight reveal reveal-delay-1">
+                        <div class="article-container">
+                            <img src="./assets/t2.png" alt="Project 2" class="project-img" />
+                        </div>
+                        <span class="project-tag">consultoria</span>
+                        <h2 class="project-title">Consultoria</h2>
+                        <div class="btn-container">
+                            <button class="btn btn-color-2 project-btn magnetic" onclick="location.href='https://thiagocacezes.github.io/tcdigital/'">
+                                <img src="./assets/t2.png" alt="Project 1" style="width:1.4rem;height:1.4rem;object-fit:contain;" />
+                            </button>
+                            <button class="btn btn-color-2 project-btn magnetic" onclick="location.href='https://thiagocacezes.github.io/tcdigital/'">TCDigital.pt</button>
+                        </div>
+                    </div>
+                    <div class="details-container color-container spotlight reveal reveal-delay-2">
+                        <div class="article-container">
+                            <img src="./assets/t2.png" alt="Project 3" class="project-img" />
+                        </div>
+                        <span class="project-tag">marketing</span>
+                        <h2 class="project-title">Marketing Digital</h2>
+                        <div class="btn-container">
+                            <button class="btn btn-color-2 project-btn magnetic" onclick="location.href='https://thiagocacezes.github.io/tcdigital/'">
+                                <img src="./assets/t2.png" alt="Project 1" style="width:1.4rem;height:1.4rem;object-fit:contain;" />
+                            </button>
+                            <button class="btn btn-color-2 project-btn magnetic" onclick="location.href='https://thiagocacezes.github.io/tcdigital/'">TCDigital.pt</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#contact'" />
+        </section>
+
+        <section id="contact">
+            <span class="eyebrow reveal">// vamos falar</span>
+            <h1 class="title reveal">Contate-me</h1>
+            <div class="contact-info-upper-container reveal">
+                <div class="contact-info-container">
+                    <img src="./assets/email.png" alt="Email icon" class="icon contact-icon email-icon" />
+                    <p><a href="mailto:thiagocacezes@tcdigital.pt">thiagocacezes@tcdigital.pt</a></p>
+                </div>
+                <div class="contact-info-container">
+                    <img src="./assets/t2.png" alt="tcdigital icon" class="icon contact-icon" />
+                    <button class="btn btn-color-2 project-btn magnetic" onclick="location.href='https://thiagocacezes.github.io/tcdigital/'">TCDigital.pt</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <div class="nav-links-container">
+                <ul class="nav-links">
+                    <li><a href="#about">Sobre</a></li>
+                    <li><a href="#experience">Experiência</a></li>
+                    <li><a href="#projects">Projetos</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </div>
+        </nav>
+        <p>&lt;/&gt; Copyright &#169; 2024 Thiago Cacezes. All Rights Reserved.</p>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
+
+    <div id="aviso-de-cookies" class="aviso-de-cookies">
+        <div class="aviso-de-cookies__conteudo">
+            <p>Este site utiliza cookies de navegação para melhorar a experiência do usuário.
+                <a href="./polPivacidade.html">Saiba mais</a>
+            </p>
+            <button id="aviso-de-cookies-fechar" class="aviso-de-cookies__botao">Ok, entendi!</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+    <link rel="stylesheet"
+        href="https://cdn.positus.global/production/resources/robbu/whatsapp-button/whatsapp-button.css">
+    <a id="robbu-whatsapp-button" target="_blank"
+        href="https://api.whatsapp.com/send?phone=351933056037&text=Ol%C3%A1!">
+        <div class="rwb-tooltip">Fale Conosco!</div>
+        <img src="https://cdn.positus.global/production/resources/robbu/whatsapp-button/whatsapp-icon.svg">
+    </a>
+
+</body>
 
 </html>
