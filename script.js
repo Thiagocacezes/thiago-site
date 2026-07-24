@@ -297,9 +297,9 @@ if (heroPic && heroPicImg) {
 /* ---------- Máquina de escrever no papel/função ---------- */
 const roleText = document.getElementById('roleText');
 const roles = [
-    'Front-End Web Developer Specialist',
+    'Full-Stack Web Developer',
     'Criador de experiências digitais',
-    'Apaixonado por design & código'
+    'Apaixonado por design & códigos'
 ];
 let roleIndex = 0, charIndex = 0, isDeleting = false;
  
