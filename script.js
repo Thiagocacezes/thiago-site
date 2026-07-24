@@ -104,7 +104,7 @@ if (canvas) {
         draw() {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(${themeColor()}, 0.45)`;
+            ctx.fillStyle = `rgba(${themeColor()}, 0.7)`;
             ctx.fill();
         }
     }
@@ -124,7 +124,7 @@ if (canvas) {
                 const dist = Math.sqrt(dx * dx + dy * dy);
                 if (dist < 120) {
                     ctx.beginPath();
-                    ctx.strokeStyle = `rgba(${themeColor()}, ${0.14 * (1 - dist / 120)})`;
+                    ctx.strokeStyle = `rgba(${themeColor()}, ${0.28 * (1 - dist / 120)})`;
                     ctx.lineWidth = 1;
                     ctx.moveTo(particles[i].x, particles[i].y);
                     ctx.lineTo(particles[j].x, particles[j].y);
@@ -297,9 +297,9 @@ if (heroPic && heroPicImg) {
 /* ---------- Máquina de escrever no papel/função ---------- */
 const roleText = document.getElementById('roleText');
 const roles = [
-    'Full-Stack Web Developer',
+    'Front-End Web Developer',
     'Criador de experiências digitais',
-    'Apaixonado por design & códigos'
+    'Apaixonado por design & código'
 ];
 let roleIndex = 0, charIndex = 0, isDeleting = false;
  
@@ -330,6 +330,122 @@ document.querySelectorAll('.magnetic').forEach((btn) => {
     btn.addEventListener('mouseleave', () => { btn.style.transform = 'translate(0,0)'; });
 });
  
+/* ---------- Code Playground: glifos de código interativos (rato + toque) ---------- */
+const glyphsCanvas = document.getElementById('glyphsCanvas');
+if (glyphsCanvas) {
+    const box = document.getElementById('codePlayground');
+    const gctx = glyphsCanvas.getContext('2d');
+    const symbols = ['<>', '{}', '()', '/>', '=>', '[]', '#', '$', ';', '&&'];
+    let glyphs = [];
+    let gMouse = { x: null, y: null };
+    let touchClearTimer = null;
+ 
+    function resizeGlyphs() {
+        glyphsCanvas.width = box.offsetWidth;
+        glyphsCanvas.height = box.offsetHeight;
+    }
+    resizeGlyphs();
+    window.addEventListener('resize', resizeGlyphs);
+ 
+    box.addEventListener('mousemove', (e) => {
+        const rect = box.getBoundingClientRect();
+        gMouse.x = e.clientX - rect.left;
+        gMouse.y = e.clientY - rect.top;
+    });
+    box.addEventListener('mouseleave', () => { gMouse.x = null; gMouse.y = null; });
+ 
+    /* toque: telemóveis e tablets — regista já no primeiro toque e mantém
+       o efeito por instantes ao soltar o dedo, para um simples toque também funcionar */
+    function setGlyphTouch(touch) {
+        const rect = box.getBoundingClientRect();
+        gMouse.x = touch.clientX - rect.left;
+        gMouse.y = touch.clientY - rect.top;
+        clearTimeout(touchClearTimer);
+    }
+    box.addEventListener('touchstart', (e) => setGlyphTouch(e.touches[0]), { passive: true });
+    box.addEventListener('touchmove', (e) => setGlyphTouch(e.touches[0]), { passive: true });
+    box.addEventListener('touchend', () => {
+        touchClearTimer = setTimeout(() => { gMouse.x = null; gMouse.y = null; }, 900);
+    }, { passive: true });
+    box.addEventListener('touchcancel', () => { gMouse.x = null; gMouse.y = null; }, { passive: true });
+ 
+    class Glyph {
+        constructor() { this.reset(); }
+        reset() {
+            this.x = Math.random() * glyphsCanvas.width;
+            this.y = Math.random() * glyphsCanvas.height;
+            this.vx = (Math.random() - 0.5) * 0.3;
+            this.vy = (Math.random() - 0.5) * 0.3;
+            this.symbol = symbols[Math.floor(Math.random() * symbols.length)];
+            this.isPurple = Math.random() > 0.5;
+            this.size = Math.random() * 8 + 13;
+            this.baseAlpha = Math.random() * 0.3 + 0.35;
+            this.energized = false;
+        }
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            if (this.x < 10 || this.x > glyphsCanvas.width - 10) this.vx *= -1;
+            if (this.y < 10 || this.y > glyphsCanvas.height - 10) this.vy *= -1;
+ 
+            this.energized = false;
+            if (gMouse.x !== null) {
+                const dx = this.x - gMouse.x;
+                const dy = this.y - gMouse.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 150) {
+                    const force = (150 - dist) / 150;
+                    this.x += (dx / (dist || 1)) * force * 1.5;
+                    this.y += (dy / (dist || 1)) * force * 1.5;
+                    this.energized = true;
+                }
+            }
+        }
+        draw() {
+            gctx.font = `${this.energized ? this.size * 1.15 : this.size}px "JetBrains Mono", monospace`;
+            const color = this.isPurple ? '139, 92, 246' : '59, 91, 253';
+            const alpha = this.energized ? Math.min(this.baseAlpha + 0.45, 1) : this.baseAlpha;
+            gctx.fillStyle = `rgba(${color}, ${alpha})`;
+            gctx.textAlign = 'center';
+            gctx.textBaseline = 'middle';
+            gctx.fillText(this.symbol, this.x, this.y);
+        }
+    }
+ 
+    function initGlyphs() {
+        const count = Math.min(22, Math.max(10, Math.floor((glyphsCanvas.width * glyphsCanvas.height) / 9000)));
+        glyphs = Array.from({ length: count }, () => new Glyph());
+    }
+    initGlyphs();
+    window.addEventListener('resize', initGlyphs);
+ 
+    function animateGlyphs() {
+        gctx.clearRect(0, 0, glyphsCanvas.width, glyphsCanvas.height);
+        glyphs.forEach((g) => g.update());
+ 
+        for (let i = 0; i < glyphs.length; i++) {
+            for (let j = i + 1; j < glyphs.length; j++) {
+                const dx = glyphs[i].x - glyphs[j].x;
+                const dy = glyphs[i].y - glyphs[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 110) {
+                    gctx.beginPath();
+                    gctx.setLineDash([3, 4]);
+                    gctx.strokeStyle = `rgba(139, 92, 246, ${0.3 * (1 - dist / 110)})`;
+                    gctx.lineWidth = 1;
+                    gctx.moveTo(glyphs[i].x, glyphs[i].y);
+                    gctx.lineTo(glyphs[j].x, glyphs[j].y);
+                    gctx.stroke();
+                    gctx.setLineDash([]);
+                }
+            }
+            glyphs[i].draw();
+        }
+        requestAnimationFrame(animateGlyphs);
+    }
+    animateGlyphs();
+}
+ 
 /* ---------- Efeito spotlight nos cards ---------- */
 document.querySelectorAll('.spotlight').forEach((card) => {
     card.addEventListener('mousemove', (e) => {
@@ -342,3 +458,4 @@ document.querySelectorAll('.spotlight').forEach((card) => {
 /* ---------- Estado inicial ---------- */
 updateScrollUI();
 updateActiveNav();
+ 
