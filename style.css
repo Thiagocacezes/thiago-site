@@ -789,7 +789,7 @@ footer p { margin-top: 1.5rem; color: var(--ink-faint); font-size: 0.85rem; font
  
 /* ===================== BACK TO TOP ===================== */
 .back-to-top {
-    position: fixed; bottom: 2rem; right: 2rem;
+    position: fixed; bottom: 2rem; left: 2rem;
     width: 3rem; height: 3rem; border-radius: 50%;
     background: var(--gradient); color: #fff; border: none;
     display: flex; align-items: center; justify-content: center;
@@ -884,7 +884,7 @@ footer p { margin-top: 1.5rem; color: var(--ink-faint); font-size: 0.85rem; font
     .code-playground__box { height: 16rem; }
     .code-playground__text p { font-size: 0.88rem; }
  
-    .back-to-top { right: 1.2rem; bottom: 1.2rem; width: 2.6rem; height: 2.6rem; font-size: 1rem; }
+    .back-to-top { left: 1.2rem; bottom: 1.2rem; width: 2.6rem; height: 2.6rem; font-size: 1rem; }
     .aviso-de-cookies { left: 0.6rem; right: 0.6rem; bottom: 0.6rem; padding: 1.1rem 1.2rem; }
 }
  
