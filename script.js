@@ -1,4 +1,5 @@
-/* ---------- Loader de entrada ---------- */
+
+ /* ---------- Loader de entrada ---------- */
 const loader = document.getElementById('loader');
 const loaderFill = document.getElementById('loaderFill');
 const loaderPct = document.getElementById('loaderPct');
@@ -49,12 +50,13 @@ if (supportsFinePointer && cursorDot && cursorRing) {
     });
 }
  
-/* ---------- Canvas de partículas (constelação) ---------- */
+/* ---------- Canvas de partículas (constelação) — reage a rato e toque em todo o site ---------- */
 const canvas = document.getElementById('particles-canvas');
 if (canvas) {
     const ctx = canvas.getContext('2d');
     let particles = [];
-    let mouse = { x: null, y: null, radius: 130 };
+    let mouse = { x: null, y: null, radius: 150 };
+    let touchClearTimerGlobal = null;
  
     function resizeCanvas() {
         canvas.width = window.innerWidth;
@@ -67,6 +69,26 @@ if (canvas) {
         mouse.x = e.clientX;
         mouse.y = e.clientY;
     });
+ 
+    /* toque: telemóveis e tablets — o dedo interage com as formas de fundo
+       em qualquer ponto do site, tal como o rato no desktop */
+    window.addEventListener('touchstart', (e) => {
+        if (!e.touches.length) return;
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+        clearTimeout(touchClearTimerGlobal);
+    }, { passive: true });
+ 
+    window.addEventListener('touchmove', (e) => {
+        if (!e.touches.length) return;
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+        clearTimeout(touchClearTimerGlobal);
+    }, { passive: true });
+ 
+    window.addEventListener('touchend', () => {
+        touchClearTimerGlobal = setTimeout(() => { mouse.x = null; mouse.y = null; }, 900);
+    }, { passive: true });
  
     function themeColor() {
         const isDark = document.body.getAttribute('data-theme') === 'dark';
@@ -82,7 +104,7 @@ if (canvas) {
             this.y = Math.random() * canvas.height;
             this.vx = (Math.random() - 0.5) * 0.35;
             this.vy = (Math.random() - 0.5) * 0.35;
-            this.size = Math.random() * 1.6 + 0.8;
+            this.size = Math.random() * 1.8 + 0.9;
         }
         update() {
             this.x += this.vx;
@@ -96,8 +118,8 @@ if (canvas) {
                 const dist = Math.sqrt(dx * dx + dy * dy);
                 if (dist < mouse.radius) {
                     const force = (mouse.radius - dist) / mouse.radius;
-                    this.x += (dx / dist) * force * 1.2;
-                    this.y += (dy / dist) * force * 1.2;
+                    this.x += (dx / dist) * force * 1.3;
+                    this.y += (dy / dist) * force * 1.3;
                 }
             }
         }
@@ -110,7 +132,7 @@ if (canvas) {
     }
  
     function initParticles() {
-        const count = Math.min(90, Math.floor((canvas.width * canvas.height) / 16000));
+        const count = Math.min(150, Math.floor((canvas.width * canvas.height) / 10000));
         particles = Array.from({ length: count }, () => new Particle());
     }
     initParticles();
@@ -297,7 +319,7 @@ if (heroPic && heroPicImg) {
 /* ---------- Máquina de escrever no papel/função ---------- */
 const roleText = document.getElementById('roleText');
 const roles = [
-    'Front-End Web Developer',
+    'Front-End Web Developer Specialist',
     'Criador de experiências digitais',
     'Apaixonado por design & código'
 ];
@@ -458,4 +480,3 @@ document.querySelectorAll('.spotlight').forEach((card) => {
 /* ---------- Estado inicial ---------- */
 updateScrollUI();
 updateActiveNav();
- 
