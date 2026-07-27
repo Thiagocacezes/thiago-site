@@ -1,394 +1,439 @@
 <!DOCTYPE html>
-<html lang="pt">
-
-<head>
-    <meta name="description"
-        content="Site com foco no desenvolvimento, voltado ao web developer, desing, marketing digital e criaçao de sites.">
-    <meta name="author" content="Thiago Cacezes">
-    <meta name="keywords"
-        content="Thiago Cacezes, thiagocacezes.com, www.tcdigital.pt, tcdigital, programação, html, css, tcdigital, js, php, tcdigital, tcdigital.pt, programador web, sites, construção de sites, Brasil, Consultoria, Marketing digital">
-    <meta name="robots" content="index,nofollow">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thiago Cacezes Front-End developer web</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body data-theme="light" class="is-loading">
-
-    <!-- loader de entrada -->
-    <div class="loader" id="loader">
-        <div class="loader__mark">&lt;<span>TC</span>/&gt;</div>
-        <div class="loader__bar"><div class="loader__bar-fill" id="loaderFill"></div></div>
-        <div class="loader__pct" id="loaderPct">0%</div>
-    </div>
-
-    <!-- cursor customizado -->
-    <div class="cursor-dot" id="cursorDot"></div>
-    <div class="cursor-ring" id="cursorRing"></div>
-
-    <!-- fundo -->
-    <canvas id="particles-canvas"></canvas>
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
-    <div class="blob blob-4"></div>
-
-    <!-- barra de progresso do scroll -->
-    <div class="scroll-progress" id="scrollProgress"></div>
-
-    <header>
-        <nav id="desktop-nav">
-            <div class="logo">&lt;<b>TC</b>/&gt;&nbsp;dev</div>
-            <div>
-                <ul class="nav-links">
-                    <li><a href="#about">Sobre</a></li>
-                    <li><a href="#experience">Experiência</a></li>
-                    <li><a href="#projects">Projetos</a></li>
-                    <li><a href="#contact">Contato</a></li>
-                </ul>
-            </div>
-            <div class="nav-extra">
-                <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">🌙</button>
-                <a class="nav-cta" href="#contact">fale comigo</a>
-            </div>
-        </nav>
-        <nav id="hamburger-nav">
-            <div class="logo">&lt;<b>TC</b>/&gt;</div>
-            <div class="hamburger-menu">
-                <button class="theme-toggle" id="themeToggleMobile" aria-label="Alternar tema">🌙</button>
-                <div class="hamburger-icon" onclick="toggleMenu()">
-                    <span></span><span></span><span></span>
+<html lang="en">
+    <head>
+        <meta name="description"
+            content="Importadora de produtos especializados em pods.">
+        <meta name="author" content="tcdigital">
+        <meta name="keywords"
+            content="Wowimports, Wow Imports, wow imports, wowimports.shop, @wow.imports_, Kit Vapes, Pod Recarregavel, Pod Descartavel, Juices Freebase, Juices NicSalt, Atomizadores, Acessórios, Joody Kiyoto Cacezes">
+        <meta name="robots" content="index,nofollow">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Wow Imports | Importadora de produtos.</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="mediaQuery.css">
+    </head>
+    <body>
+        <header>
+            <nav>
+                <div class="scroll-up-btn">
+                    <ion-icon name="chevron-up-outline"></ion-icon>
                 </div>
-                <div class="menu-links">
-                    <li><a href="#about" onclick="toggleMenu()">Sobre</a></li>
-                    <li><a href="#experience" onclick="toggleMenu()">Experiência</a></li>
-                    <li><a href="#projects" onclick="toggleMenu()">Projetos</a></li>
-                    <li><a href="#contact" onclick="toggleMenu()">Contato</a></li>
+                <div class="navbar">
+                    <div class="max-width">
+                        <div class="logo">
+                            <div class="logo"><a href="#"><span id="logo"
+                                        class="typing"
+                                        data-strings="Wow Imports"></span></a></div>
+                        </div>
+                        <ul class="menu">
+                            <li><a href="#home">Inicio</a></li>
+                            <li><a href="#about">Sobre</a></li>
+                            <li><a href="#services">Produtos</a></li>
+                            <li><a href="#skills">Liquidos</a></li>
+                            <li><a href="#teams">Na Wow</a></li>
+                            <li><a href="#contact">Contato</a></li>
+                        </ul>
+                        <div class="menu-btn">
+                            <ion-icon name="menu-outline"></ion-icon>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>
+            </nav>
 
-    <!-- navegação lateral por pontos -->
-    <nav class="dot-nav" id="dotNav">
-        <div class="dot-nav__line"></div>
-        <button class="dot-nav__item" data-target="#profile"><span class="dot-tooltip">Início</span></button>
-        <button class="dot-nav__item" data-target="#about"><span class="dot-tooltip">Sobre</span></button>
-        <button class="dot-nav__item" data-target="#experience"><span class="dot-tooltip">Experiência</span></button>
-        <button class="dot-nav__item" data-target="#masterclasses"><span class="dot-tooltip">MasterClasses</span></button>
-        <button class="dot-nav__item" data-target="#missao"><span class="dot-tooltip">Missão</span></button>
-        <button class="dot-nav__item" data-target="#projects"><span class="dot-tooltip">Projetos</span></button>
-        <button class="dot-nav__item" data-target="#contact"><span class="dot-tooltip">Contato</span></button>
-    </nav>
+            <!--Começo-->
 
-    <main>
-        <section id="profile">
-            <div class="section__pic-container" id="heroPic">
-                <div class="pic-glow"></div>
-                <div class="pic-frame"></div>
-                <img src="./assets/nTb4bdPmT0SZjDNgk6YAZA.png" alt="thiago cacezes profile picture" id="about-pic" />
-                <div class="pic-tag"><i>●</i>&nbsp; Sempre em atualização.</div>
-            </div>
-            <div class="section__text">
-                <span class="eyebrow">Portfólio // front-end Web Developer Specialist</span>
-                <h1 class="title--hero"><span class="static-part">Thiago</span> Cacezes</h1>
-                <p class="hero-role"><span id="roleText"></span><span class="cursor-blink"></span></p>
-                <div class="btn-container">
-                    <button class="btn btn-color-1 magnetic" onclick="window.open('./assets/IMG_8444.jpg')">
-                        Certificado Profissional
-                    </button>
-                    <button class="btn btn-color-2 magnetic" onclick="location.href='https://www.credly.com/users/thiago-cacezes/'">
-                        <img src="./assets/t2.png" alt="" class="project-img" style="width:1.4rem;height:1.4rem;object-fit:contain;" />
-                    </button>
+            <section class="home" id="home">
+                <div class="max-width">
+                    <div class="home-content">
+                        <div class="text-1">
+                            <strong>Bem Vindos!</strong></div>
+                        <h1 class="text-2">Wow Imports</h1>
+                        <div class="text-3"><span
+                                class="typing"
+                                data-strings="Kit Vapes, Pod Recarregável, Pod Descartável, Juices Freebase, Juices NicSalt, Atomizadores, Acessórios"></span></div>
+                        <br>
+                        <div class="text-4">O mundo <strong>Vaps</strong> nas
+                            suas mãos
+                            de forma <strong>rápida!</strong></div>
+                        <br>
+                        <a id="porra"
+                            href="https://meucomercio.com.br/wowimportsbr">Novidades!</a>
+                    </div>
                 </div>
-                <div id="socials-container">
-                    <img src="./assets/github.png" alt="My Github profile" class="icon"
-                        onclick="location.href='https://github.com/Thiagocacezes'" />
-                    <img src="./assets/Credly-187x187.png" alt="My Credly profile" class="icon"
-                        onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
+                <div>
+                    <img src="./assets/logo sem fundo.png" alt="Wow imports image"
+                        id="imgul1">
+                </div>
+            </section>
+        </header>
+        <!--Sobre-->
+        <main>
+            <section class="about" id="about">
+                <div class="max-width">
+                    <h2 class="title">Sobre</h2>
+                    <div class="about-content">
+                        <div class="column left">
+                            <img id="imgul3"
+                                src="./assets/wow3.png" alt="Wow imports image">
+                        </div>
+                        <div class="column right">
+                            <h2 class="text">Wow Imports: <span
+                                    class="typing"
+                                    data-strings="Vapes,Pods, Baterias, Kits, Juices"></span></h2>
+
+                            <p> A Wow Imports é uma empresa dedicada ao mercado
+                                de vapes e líquidos de alta qualidade.
+                                Com um portfólio diversificado e produtos que
+                                seguem os mais rigorosos padrões de segurança,
+                                buscamos oferecer a melhor experiência de vaping
+                                para nossos clientes.
+                                Trabalhamos com as principais marcas do setor,
+                                garantindo inovação, confiança e satisfação.
+                                Seja você um iniciador ou um entusiasta, a Wow
+                                Imports é a sua escolha para produtos de
+                                vaping premium e um atendimento especializado.
+                            </p>
+                            <a
+                                href="https://meucomercio.com.br/wowimportsbr">Produtos!</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <div class="marquee reveal">
-            <div class="marquee__track" id="marqueeTrack">
-                <span class="marquee__item">HTML</span>
-                <span class="marquee__item">CSS</span>
-                <span class="marquee__item">SASS</span>
-                <span class="marquee__item">JavaScript</span>
-                <span class="marquee__item">React</span>
-                <span class="marquee__item">Node.js</span>
-                <span class="marquee__item">Express.js</span>
-                <span class="marquee__item">PHP</span>
-                <span class="marquee__item">Laravel</span>
-                <span class="marquee__item">MySQL</span>
-                <span class="marquee__item">REST API</span>
-                <span class="marquee__item">Scrum</span>
+        <!--Serviços-->
+        <section class="services" id="services">
+            <div class="max-width">
+                <h2 class="title">Produtos</h2>
+                <br>
+                <div class="serv-content">
+                    <div class="card">
+                        <div class="box">
+                            <ion-icon name="telescope-outline"></ion-icon>
+                            <div class="text"> Kit Vapes</div>
+                            <p>Na Wow Imports, nosso foco é proporcionar uma
+                                experiência única no mundo dos vapes.
+                                Trabalhamos para oferecer produtos de alta
+                                qualidade, com uma vasta gama de vapes e
+                                líquidos para atender a todos os gostos e
+                                necessidades.Na Wow. </p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="box">
+                            <ion-icon name="rocket-outline"></ion-icon>
+                            <div class="text">Pods</div>
+                            <p>Na Wow, em oferecer kits de vapes e líquidos de
+                                alta qualidade,
+                                perfeitos para quem busca praticidade e uma
+                                experiência única de vaping. Nossos kits são
+                                selecionados para atender tanto iniciantes
+                                quanto usuários experientes.</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="box">
+                            <ion-icon
+                                name="flask-outline"></ion-icon>
+                            <div class="text">Liquidos</div>
+                            <p>A Wow é especializada em líquidos para vapes,
+                                oferecendo uma ampla gama de sabores
+                                que atendem a todos os gostos. Trabalhamos com
+                                ingredientes de alta qualidade e seguimos os
+                                mais rigorosos padrões de segurança, garantindo
+                                uma experiência de vaping única.Só na Wow!</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="box">
+                            <ion-icon
+                                name="battery-charging-outline"></ion-icon>
+                            <div class="text">Acessórios</div>
+                            <p>A Wow Imports oferece baterias de alta
+                                performance para pods e vapes, garantindo
+                                durabilidade
+                                e segurança em cada uso. Trabalhamos com as
+                                melhores marcas de baterias
+                                para uma experiência de vaping mais eficiente e
+                                prazerosa.Só na Wow!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!--Tecnologia-->
+            <section class="skills" id="skills">
+                <div class="max-width">
+                    <h2 class="title">Liquidos</h2>
+                    <div class="skills-content">
+                        <div class="column left">
+                            <div class="text">Utilizamos as mais recentes
+                                tecnologias e assim investimos nos melhores
+                                produtos.</div>
+                            <p>Na Wow Imports, buscamos sempre oferecer o melhor
+                                para nossos clientes,
+                                por isso utilizamos os mais recentes liquidos do
+                                mercado.
+                                Investimos continuamente nas melhores opções do
+                                mercado, garantindo qualidade,
+                                inovação e desempenho superior. Seja em vapes,
+                                líquidos, baterias ou acessórios,
+                                cada produto é cuidadosamente selecionado para
+                                atender aos mais altos padrões
+                                de segurança e satisfação. Nosso compromisso é
+                                trazer o que há de mais moderno,
+                                proporcionando a melhor experiência de vaping a
+                                cada cliente.
+                            </p>
+                            <a
+                                href="https://meucomercio.com.br/wowimportsbr">Liquidos</a>
+                        </div>
+                        <div class="column right">
+                            <img id="imgul"
+                                src="./assets/wow101.png" alt="Wow imports image">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!--Certificação-->
+            <section class="teams" id="teams">
+                <div class="max-width">
+                    <h2 class="title">Só na Wow</h2>
+                    <div class="carousel owl-carousel ">
+                        <div class="card">
+                            <div class="box">
+                                <a
+                                    href="https://meucomercio.com.br/wowimportsbr/"><img
+                                        src="./assets/wow4.png"
+                                        alt="Wow imports image"></a>
+                                <div class="text">Por que usar nossos
+                                    produtos</div>
+                                <p>Escolher os produtos da Wow Imports é optar
+                                    por qualidade,
+                                    inovação e confiança. Utilizamos as mais
+                                    recentes tecnologias
+                                    e selecionamos os melhores materiais para
+                                    garantir um desempenho
+                                    superior em cada produto. Com rigorosos
+                                    padrões de segurança e
+                                    um portfólio diversificado, oferecemos uma
+                                    experiência de
+                                    vaping única e satisfatória.</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="box">
+                                <a
+                                    href="https://meucomercio.com.br/wowimportsbr/"><img
+                                        src="./assets/wow5.png"
+                                        alt="Wow imports image"></a>
+                                <div class="text">Kits e Vapes
+                                    Descartaveis.</div>
+
+                                <p>Oferecemos uma variedade de kits e vapes
+                                    descartáveis,
+                                    ideais para quem busca praticidade e estilo.
+                                    Nossos produtos contam com sabores intensos,
+                                    tecnologia avançada e design moderno.
+                                    Perfeitos
+                                    para iniciantes e experientes, garantem uma
+                                    experiência
+                                    única sem complicações. Escolha o seu e
+                                    aproveite!</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="box">
+                                <a
+                                    href="https://meucomercio.com.br/wowimportsbr/"><img
+                                        src="./assets/wow6.jpg"
+                                        alt="Wow imports image"></a>
+                                <div class="text">As melhores
+                                    Resistências.</div>
+                                <p>Trabalhamos com uma linha completa de
+                                    resistências para vapes,
+                                    compatíveis com diversas marcas e modelos.
+                                    Ideais para manter a
+                                    performance do seu dispositivo, elas
+                                    garantem vapor denso,
+                                    sabor puro e longa durabilidade. Renove sua
+                                    experiência com
+                                    qualidade e segurança. Escolha a resistência
+                                    certa para seu vape!</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="box">
+                                <a
+                                    href="https://meucomercio.com.br/wowimportsbr/"><img
+                                        src="./assets/wow7.png"
+                                        alt="Wow imports image"></a>
+                                <div class="text">Vapes das melhores
+                                    marcas!</div>
+
+                                <p>Oferecemos uma ampla seleção de vapes para
+                                    todos os perfis,
+                                    dos iniciantes aos mais experientes. Com
+                                    design moderno,
+                                    ótimo desempenho e variedade de sabores,
+                                    nossos dispositivos
+                                    garantem uma experiência de vaporização
+                                    intensa e satisfatória.
+                                    Qualidade, praticidade e estilo em um só
+                                    lugar.
+                                    Escolha seu vape ideal!</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="box">
+                                <a
+                                    href="https://meucomercio.com.br/wowimportsbr/"><img
+                                        src="./assets/wow102.png"
+                                        alt="Wow imports image"></a>
+                                <div class="text">Liquidos/Juices</div>
+                                <p>Confira nossa linha de líquidos para vape,
+                                    produzidos com ingredientes
+                                    de alta qualidade e procedência segura.
+                                    Oferecemos sabores variados
+                                    para todos os gostos, garantindo uma
+                                    vaporização suave,
+                                    saborosa e confiável. Vapear com segurança é
+                                    essencial
+                                    — escolha nossos líquidos e tenha a melhor
+                                    experiência nas marcas: NASTY, ZOMO, HYPNOS,
+                                    MAGNAS, BEATES!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!--Contato-->
+            <section class="contact" id="contact">
+                <div class="max-width">
+                    <h2 class="title">Contato</h2>
+                    <div class="contact-content">
+                        <div class="column left">
+                            <div class="text">Bem-vindo à nossa página de
+                                contatos!</div>
+                            <p>Estamos aqui para ouvir você. Se você tiver
+                                alguma dúvida, comentário, ou simplesmente
+                                quiser
+                                dizer "olá", por favor, não hesite em nos
+                                contatar. Sua opinião é muito importante para
+                                nós e
+                                estamos ansiosos para ajudar no que pudermos.
+                                Prometemos responder o mais rápido possível.
+
+                                Se preferir, você também pode nos contatar
+                                através dos seguintes meios:</p>
+
+                            <br>
+                            <div class="icons">
+                                <div class="row">
+                                    <ion-icon name="person-outline"></ion-icon>
+                                    <div class="info">
+                                        <div class="head">Wow Imports</div>
+
+                                        <a
+                                            href="https://meucomercio.com.br/wowimportsbr"><div
+                                                class="sub-title"></div></a>
+
+                                    </div>
+                                </div>
+                                <br>
+
+                                <div class="row">
+                                    <ion-icon name="mail-outline"></ion-icon>
+                                    <div class="info">
+                                        <div class="head">Email</div>
+                                        <a
+                                            href="mailto:contato@tcdigital.pt"><div
+                                                class="sub-title">atendimentowowinfinite@gmail.com</div></a>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <ion-icon name="logo-whatsapp"></ion-icon>
+                                    <div class="info">
+                                        <button class="head"
+                                            onclick="location.href='https://api.whatsapp.com/send?phone=+595992190221&text=Ol%C3%A1%2C%20gostaria%20de%20entrar%20em%20contato%20com%20voc%C3%AA.'"">Suporte</button>
+                                        <div class="sub-title"></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <ion-icon name="logo-instagram"></ion-icon>
+                                    <div class="info">
+                                        <a
+                                            href="https://instagram.com/wow.imports_/"><div
+                                                class="sub-title">@wow.imports_</div>
+                                            <div class="sub-title"></div></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column rigth">
+                            <img src="./assets/wow.png" alt="Wow imports image"
+                                id="imgul">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!--Footer-->
+        <footer>
+            <p>Copyright &#169; 2025 Wow Imports. All Rights
+                Reserved.</p>
+
+        </footer>
+
+        <script type="module"
+            src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule
+            src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="script.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+        <!--<script
+            src="https://dashboard.chatfuel.com/integration/landing-wa-widget.js"
+            async defer data-prefilled="Olá" data-welcome="Olá"
+            data-phone="35">
+
+        </script>-->
+
+        <!--aviso de cookies-->
+        <div id="aviso-de-cookies" class="aviso-de-cookies">
+            <div class="aviso-de-cookies__conteudo">
+                <p>Este site utiliza cookies de navegação para melhorar a
+                    experiência do usuário. <a href="./priv.html">Saiba
+                        mais</a></p>
+                <br>
+                <button id="aviso-de-cookies-fechar"
+                    class="aviso-de-cookies__botao">Ok, entendi!</button>
             </div>
         </div>
+        <link rel="stylesheet"
+            href="https://cdn.positus.global/production/resources/robbu/whatsapp-button/whatsapp-button.css">
+        <a id="robbu-whatsapp-button" target="_blank"
+            href="https://api.whatsapp.com/send?phone=+595992190221&text=Ol%C3%A1!">
+            <div class="rwb-tooltip">Fale Conosco!</div> <img
+                src="https://cdn.positus.global/production/resources/robbu/whatsapp-button/whatsapp-icon.svg">
+        </a>
 
-        <div class="stats">
-            <div class="stat reveal"><div class="stat__num" data-count="4">0</div><div class="stat__label">anos de experiência</div></div>
-            <div class="stat reveal reveal-delay-1"><div class="stat__num" data-count="14">0</div><div class="stat__label">tecnologias</div></div>
-            <div class="stat reveal reveal-delay-2"><div class="stat__num" data-count="22">0</div><div class="stat__label">projetos entregues</div></div>
-            <div class="stat reveal"><div class="stat__num" data-count="38">0</div><div class="stat__label">masterclasses</div></div>
-        </div>
-
-        <section id="about">
-            <span class="eyebrow reveal">// sobre mim</span>
-            <h1 class="title reveal">Sobre Mim</h1>
-            <div class="section-container">
-                <div class="about-pic-wrap reveal">
-                    <img src="./assets/IMG_5518.jpeg" alt="tcdigital picture" class="about-pic" />
-                </div>
-                <div class="about-details-container">
-                    <div class="about-containers">
-                        <div class="details-container spotlight reveal">
-                            <img src="./assets/t2.png" alt="icon" class="icon about-pic"
-                                onclick="location.href='https://www.tcdigital.pt/'" />
-                            <h3>Agência TCDigital.pt</h3>
-                            <p>Agência de produtos web.</p>
-                        </div>
-                        <div class="details-container spotlight reveal reveal-delay-1">
-                            <img src="./assets/front.png" alt="icon" class="icon"
-                                onclick="location.href='https://www.credly.com/users/thiago-cacezes/'" />
-                            <h3>Formação</h3>
-                            <p>Flag Academy, Lisboa — Portugal.<br />Front-End Web Developer Specialist</p>
-                        </div>
-                    </div>
-                    <div class="text-container spotlight reveal reveal-delay-2">
-                        <p>
-                            As a web artist, weaving codes and colors to create engaging digital experiences, my
-                            journey began in vibrant Lisbon, where I graduated from Flag academy. With two years of
-                            practice, I turned pixels into masterpieces, blending my passion for design with sharp
-                            technical skills. I am a digital dream architect, shaping the future of the web with
-                            every line of code and stroke of creativity.
-                        </p>
-                        <p>
-                            Como um artista da web, tecendo códigos e cores para criar experiências digitais
-                            cativantes, minha jornada começou na vibrante Lisboa, onde me graduei na academia Flag.
-                            Com dois anos de prática, transformei pixels em obras-primas, misturando minha paixão por
-                            design com habilidades técnicas afiadas. Sou um arquiteto de sonhos digitais, moldando o
-                            futuro da web com cada linha de código e pincelada de criatividade.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#experience'" />
-        </section>
-
-        <div class="code-playground reveal">
-            <div class="code-playground__label">
-                <span class="code-playground__label-word">Interaja</span>
-                <span class="code-playground__label-sub">mova o cursor — ou toque no ecrã</span>
-            </div>
-            <div class="code-playground__arrow" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 5v14"></path>
-                    <path d="M6 13l6 6 6-6"></path>
-                </svg>
-            </div>
-            <div class="code-playground__box" id="codePlayground">
-                <canvas id="glyphsCanvas"></canvas>
-                <div class="code-playground__text">
-                    <p>Os símbolos do código ganham forma perto de si.</p>
-                </div>
-            </div>
-        </div>
-
-        <section id="experience">
-            <span class="eyebrow reveal">// stack técnica</span>
-            <h1 class="title reveal">Jornada no Desenvolvimento Digital</h1>
-            <div class="experience-details-container">
-                <div class="about-containers">
-                    <div class="details-container spotlight reveal">
-                        <h2 class="experience-sub-title">front-end.js</h2>
-                        <div class="article-container">
-                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/htnl.png" alt="Experience icon" class="icon" /><div><h3>HTML</h3><p>Experienced</p></div></article></a>
-                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/htnl.png" alt="Experience icon" class="icon" /><div><h3>CSS</h3><p>Experienced</p></div></article></a>
-                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/htnl.png" alt="Experience icon" class="icon" /><div><h3>SASS</h3><p>Experienced</p></div></article></a>
-                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/htnl.png" alt="Experience icon" class="icon" /><div><h3>JavaScript</h3><p>Experienced</p></div></article></a>
-                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/htnl.png" alt="Experience icon" class="icon" /><div><h3>React</h3><p>Experienced</p></div></article></a>
-                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/htnl.png" alt="Experience icon" class="icon" /><div><h3>Metodologia: Scrum</h3><p>Experienced</p></div></article></a>
-                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/front.png" alt="Experience icon" class="icon" /><div><h3>Front-End Developer Specialist</h3><p>Experienced</p></div></article></a>
-                        </div>
-                    </div>
-                    <div class="details-container spotlight reveal reveal-delay-1">
-                        <h2 class="experience-sub-title">back-end.js</h2>
-                        <div class="article-container">
-                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/htnl.png" alt="Experience icon" class="icon" /><div><h3>Estruturação de Dados</h3><p>Experienced</p></div></article></a>
-                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/htnl.png" alt="Experience icon" class="icon" /><div><h3>Data Base MySQL</h3><p>Experienced</p></div></article></a>
-                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/htnl.png" alt="Experience icon" class="icon" /><div><h3>PHP</h3><p>Experienced</p></div></article></a>
-                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/htnl.png" alt="Experience icon" class="icon" /><div><h3>Laravel</h3><p>Experienced</p></div></article></a>
-                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/htnl.png" alt="Experience icon" class="icon" /><div><h3>Creating REST API'S</h3><p>Experienced</p></div></article></a>
-                            <a href="https://www.credly.com/users/thiago-cacezes/"><article><img src="./assets/htnl.png" alt="Experience icon" class="icon" /><div><h3>NodeJS + ExpressJS</h3><p>Experienced</p></div></article></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#masterclasses'" />
-        </section>
-
-        <section id="masterclasses">
-            <span class="eyebrow reveal">// aprendizado contínuo</span>
-            <h1 class="title reveal">MasterClasses</h1>
-            <div class="experience-details-container">
-                <div class="about-containers">
-                    <div class="details-container spotlight reveal">
-                        <div class="article-container">
-                            <article><img src="./assets/mas7.png" alt="Experience icon" class="icon" /><div><h3>ChatGPT - Increase your productivity with AI</h3><p>Rumos</p></div></article>
-                            <article><img src="./assets/mas6.png" alt="Experience icon" class="icon" /><div><h3>Strategic Personal Branding</h3><p>Rumos</p></div></article>
-                            <article><img src="./assets/mas2.png" alt="Experience icon" class="icon" /><div><h3>Product Design Process & Documentation</h3><p>Flag</p></div></article>
-                            <article><img src="./assets/mas3.png" alt="Experience icon" class="icon" /><div><h3>Timelapse: a creative technique</h3><p>Flag</p></div></article>
-                            <article><img src="./assets/mas4.png" alt="Experience icon" class="icon" /><div><h3>Design beyond Aesthetics</h3><p>Flag</p></div></article>
-                            <article><img src="./assets/mas5.png" alt="Experience icon" class="icon" /><div><h3>Visual identity & Logo</h3><p>Flag</p></div></article>
-                            <article><img src="./assets/mas6.png" alt="Experience icon" class="icon" /><div><h3>Strengthen data security with Azure Key Vault</h3><p>Flag</p></div></article>
-                            <article><img src="./assets/mas8.png" alt="Experience icon" class="icon" /><div><h3>The Transformative Power of Cinema in the Communities</h3><p>Flag</p></div></article>
-                            <article><img src="./assets/mas9.png" alt="Experience icon" class="icon" /><div><h3>Curiosity, that incredible tool</h3><p>Flag</p></div></article>
-                            <article><img src="./assets/mas10.png" alt="Experience icon" class="icon" /><div><h3>Combine Humor with Content Marketing</h3><p>Flag</p></div></article>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#missao'" />
-        </section>
-
-        <section id="missao">
-            <span class="eyebrow reveal">// filosofia de trabalho</span>
-            <h1 class="title reveal">Missão</h1>
-            <div class="terminal reveal">
-                <div class="terminal__bar">
-                    <span class="terminal__dot terminal__dot--r"></span>
-                    <span class="terminal__dot terminal__dot--y"></span>
-                    <span class="terminal__dot terminal__dot--g"></span>
-                    <span class="terminal__file">missao.js</span>
-                </div>
-                <div class="terminal__body">
-                    <div class="terminal__lines">
-                        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-                        <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span>
-                    </div>
-                    <div class="terminal__code">
-                        <span class="terminal__comment">/**</span>
-                        <span class="terminal__comment"> * Na vanguarda da criação digital, minha missão é transformar</span>
-                        <span class="terminal__comment"> * visões em realidade virtual, tecendo uma tapeçaria de inovação</span>
-                        <span class="terminal__comment"> * e beleza através do design front-end. Cada projeto é uma</span>
-                        <span class="terminal__comment"> * jornada emocionante, onde fusiono paixão pelo design com</span>
-                        <span class="terminal__comment"> * precisão técnica, moldando experiências que transcendem o comum.</span>
-                        <span class="terminal__comment"> * Meu compromisso é ir além das expectativas, entregando obras</span>
-                        <span class="terminal__comment"> * de arte digitais que inspiram, encantam e deixam uma marca</span>
-                        <span class="terminal__comment"> * duradoura — elevando a estética e a funcionalidade a um novo</span>
-                        <span class="terminal__comment"> * padrão de excelência, uma linha de código de cada vez.</span>
-                        <span class="terminal__comment"> */</span>
-                        <span><span class="kw">const</span> autor <span class="punct">=</span> <span class="str">"Thiago Cacezes"</span><span class="punct">;</span></span>
-                    </div>
-                </div>
-            </div>
-            <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#projects'" />
-        </section>
-
-        <section id="projects">
-            <span class="eyebrow reveal">// portfólio</span>
-            <h1 class="title reveal">Atuações</h1>
-            <div class="experience-details-container">
-                <div class="about-containers">
-                    <div class="details-container color-container spotlight reveal">
-                        <div class="article-container">
-                            <img src="./assets/t2.png" alt="Project 1" class="project-img" />
-                        </div>
-                        <span class="project-tag">web</span>
-                        <h2 class="project-title">Sites</h2>
-                        <div class="btn-container">
-                            <button class="btn btn-color-2 project-btn magnetic" onclick="location.href='https://thiagocacezes.github.io/tcdigital/'">
-                                <img src="./assets/t2.png" alt="Project 1" style="width:1.4rem;height:1.4rem;object-fit:contain;" />
-                            </button>
-                            <button class="btn btn-color-2 project-btn magnetic" onclick="location.href='https://thiagocacezes.github.io/tcdigital/'">TCDigital.pt</button>
-                        </div>
-                    </div>
-                    <div class="details-container color-container spotlight reveal reveal-delay-1">
-                        <div class="article-container">
-                            <img src="./assets/t2.png" alt="Project 2" class="project-img" />
-                        </div>
-                        <span class="project-tag">consultoria</span>
-                        <h2 class="project-title">Consultoria</h2>
-                        <div class="btn-container">
-                            <button class="btn btn-color-2 project-btn magnetic" onclick="location.href='https://thiagocacezes.github.io/tcdigital/'">
-                                <img src="./assets/t2.png" alt="Project 1" style="width:1.4rem;height:1.4rem;object-fit:contain;" />
-                            </button>
-                            <button class="btn btn-color-2 project-btn magnetic" onclick="location.href='https://thiagocacezes.github.io/tcdigital/'">TCDigital.pt</button>
-                        </div>
-                    </div>
-                    <div class="details-container color-container spotlight reveal reveal-delay-2">
-                        <div class="article-container">
-                            <img src="./assets/t2.png" alt="Project 3" class="project-img" />
-                        </div>
-                        <span class="project-tag">marketing</span>
-                        <h2 class="project-title">Marketing Digital</h2>
-                        <div class="btn-container">
-                            <button class="btn btn-color-2 project-btn magnetic" onclick="location.href='https://thiagocacezes.github.io/tcdigital/'">
-                                <img src="./assets/t2.png" alt="Project 1" style="width:1.4rem;height:1.4rem;object-fit:contain;" />
-                            </button>
-                            <button class="btn btn-color-2 project-btn magnetic" onclick="location.href='https://thiagocacezes.github.io/tcdigital/'">TCDigital.pt</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#contact'" />
-        </section>
-
-        <section id="contact">
-            <span class="eyebrow reveal">// vamos falar</span>
-            <h1 class="title reveal">Contate-me</h1>
-            <div class="contact-info-upper-container reveal">
-                <div class="contact-info-container">
-                    <img src="./assets/email.png" alt="Email icon" class="icon contact-icon email-icon" />
-                    <p><a href="mailto:thiagocacezes@tcdigital.pt">thiagocacezes@tcdigital.pt</a></p>
-                </div>
-                <div class="contact-info-container">
-                    <img src="./assets/t2.png" alt="tcdigital icon" class="icon contact-icon" />
-                    <button class="btn btn-color-2 project-btn magnetic" onclick="location.href='https://thiagocacezes.github.io/tcdigital/'">TCDigital.pt</button>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <nav>
-            <div class="nav-links-container">
-                <ul class="nav-links">
-                    <li><a href="#about">Sobre</a></li>
-                    <li><a href="#experience">Experiência</a></li>
-                    <li><a href="#projects">Projetos</a></li>
-                    <li><a href="#contact">Contato</a></li>
-                </ul>
-            </div>
-        </nav>
-        <p>&lt;/&gt; Copyright &#169; 2024 Thiago Cacezes. All Rights Reserved.</p>
-    </footer>
-
-    <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
-
-    <div id="aviso-de-cookies" class="aviso-de-cookies">
-        <div class="aviso-de-cookies__conteudo">
-            <p>Este site utiliza cookies de navegação para melhorar a experiência do usuário.
-                <a href="./polPivacidade.html">Saiba mais</a>
-            </p>
-            <button id="aviso-de-cookies-fechar" class="aviso-de-cookies__botao">Ok, entendi!</button>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-
-    <link rel="stylesheet"
-        href="https://cdn.positus.global/production/resources/robbu/whatsapp-button/whatsapp-button.css">
-    <a id="robbu-whatsapp-button" target="_blank"
-        href="https://api.whatsapp.com/send?phone=351933056037&text=Ol%C3%A1!">
-        <div class="rwb-tooltip">Fale Conosco!</div>
-        <img src="https://cdn.positus.global/production/resources/robbu/whatsapp-button/whatsapp-icon.svg">
-    </a>
-
-</body>
-
+    </body>
 </html>
