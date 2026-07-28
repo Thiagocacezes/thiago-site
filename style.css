@@ -283,7 +283,16 @@ nav { justify-content: space-between; align-items: center; }
     z-index: 1000;
 }
 .hamburger-menu { position: relative; display: flex; align-items: center; gap: 0.5rem; }
-.hamburger-icon { display: flex; flex-direction: column; justify-content: space-between; height: 16px; width: 24px; }
+.hamburger-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: content-box;
+    width: 24px;
+    height: 16px;
+    padding: 12px;
+    margin: -12px;
+}
 .hamburger-icon span { width: 100%; height: 2px; border-radius: 2px; background-color: var(--ink); transition: all 0.3s ease-in-out; }
 .hamburger-icon.open span:first-child { transform: rotate(45deg) translate(5px, 5px); }
 .hamburger-icon.open span:nth-child(2) { opacity: 0; }
@@ -666,6 +675,7 @@ section {
     background: var(--surface-solid);
     border: 1px solid var(--border-strong);
     padding: 0.65rem 1.4rem;
+    min-height: 2.75rem;
     border-radius: 100px;
     cursor: pointer;
     transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease, background 220ms ease;
@@ -906,6 +916,7 @@ footer p { margin-top: 1.5rem; color: var(--ink-faint); font-size: 0.85rem; font
 /* Ecrãs muito largos: travar o conteúdo para não ficar demasiado espalhado */
 @media screen and (min-width: 1700px) {
     section { max-width: 78rem; }
+    .stats, .code-playground { max-width: 78rem; }
 }
  
 /* Laptops pequenos / tablets grandes */
@@ -977,6 +988,7 @@ footer p { margin-top: 1.5rem; color: var(--ink-faint); font-size: 0.85rem; font
     .eyebrow { font-size: 0.75rem; }
     .hero-role { font-size: 0.85rem; }
     .section__pic-container { height: 11.5rem; width: 11.5rem; }
+    .pic-tag { white-space: normal; text-align: center; max-width: 12rem; line-height: 1.4; }
     .about-pic-wrap { max-width: 11rem; }
     .title { font-size: 1.5rem; }
     article { padding: 0.6rem 0.7rem; }
@@ -997,4 +1009,7 @@ footer p { margin-top: 1.5rem; color: var(--ink-faint); font-size: 0.85rem; font
     #profile { min-height: auto; padding-top: 6.5rem; padding-bottom: 2rem; }
     .section__pic-container { height: 11rem; width: 11rem; }
     section { padding-top: 5rem; }
+    .code-playground__box { height: 12rem; }
+    .code-playground__label-word { font-size: 1.3rem; }
+    .code-playground__arrow { margin-bottom: 0.4rem; }
 }
