@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body data-theme="light" class="is-loading">
+<body data-theme="dark" class="is-loading">
 
     <!-- loader de entrada -->
     <div class="loader" id="loader">
@@ -51,14 +51,28 @@
                 </ul>
             </div>
             <div class="nav-extra">
-                <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">🌙</button>
+                <div class="theme-slider" id="themeSliderDesktop" tabindex="0" role="slider"
+                    aria-label="Deslizar entre dia e noite" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                    <span class="theme-slider__icon theme-slider__icon--sun" aria-hidden="true">☀️</span>
+                    <div class="theme-slider__track">
+                        <div class="theme-slider__thumb"></div>
+                    </div>
+                    <span class="theme-slider__icon theme-slider__icon--moon" aria-hidden="true">🌙</span>
+                </div>
                 <a class="nav-cta" href="#contact">fale comigo</a>
             </div>
         </nav>
         <nav id="hamburger-nav">
             <div class="logo">&lt;<b>TC</b>/&gt;</div>
             <div class="hamburger-menu">
-                <button class="theme-toggle" id="themeToggleMobile" aria-label="Alternar tema">🌙</button>
+                <div class="theme-slider theme-slider--compact" id="themeSliderMobile" tabindex="0" role="slider"
+                    aria-label="Deslizar entre dia e noite" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                    <span class="theme-slider__icon theme-slider__icon--sun" aria-hidden="true">☀️</span>
+                    <div class="theme-slider__track">
+                        <div class="theme-slider__thumb"></div>
+                    </div>
+                    <span class="theme-slider__icon theme-slider__icon--moon" aria-hidden="true">🌙</span>
+                </div>
                 <div class="hamburger-icon" onclick="toggleMenu()">
                     <span></span><span></span><span></span>
                 </div>

@@ -59,7 +59,12 @@ body {
     color: var(--ink);
     overflow-x: hidden;
     max-width: 100%;
-    transition: background 0.4s ease, color 0.4s ease;
+}
+/* durante o arrasto do slider dia/noite, desliga TODAS as transições:
+   evita que animações CSS "lutem" contra a atualização contínua feita pelo JS
+   (era isso que causava o salto/estouro de cor a meio do arrasto) */
+body.is-theme-dragging, body.is-theme-dragging * {
+    transition: none !important;
 }
 img { max-width: 100%; }
  
@@ -248,15 +253,60 @@ nav { justify-content: space-between; align-items: center; }
  
 .nav-extra { display: flex; align-items: center; gap: 0.5rem; }
  
-.theme-toggle {
-    width: 2.5rem; height: 2.5rem; border-radius: 50%;
-    border: 1px solid var(--border);
-    background: var(--surface-solid);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.05rem;
-    transition: transform 250ms ease, box-shadow 250ms ease;
+.theme-slider {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    outline: none;
+    border-radius: 100px;
 }
-.theme-toggle:hover { transform: rotate(20deg) scale(1.05); box-shadow: var(--shadow-sm); }
+.theme-slider:focus-visible .theme-slider__track {
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.35);
+}
+.theme-slider__icon {
+    font-size: 0.9rem;
+    line-height: 1;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 200ms ease;
+}
+.theme-slider__icon:hover { transform: scale(1.18); }
+.theme-slider__track {
+    position: relative;
+    width: 3.6rem;
+    height: 1.35rem;
+    border-radius: 100px;
+    background: linear-gradient(90deg, #cfe0fb 0%, #8891dd 55%, #23264f 100%);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    touch-action: none;
+    flex-shrink: 0;
+}
+.theme-slider__thumb {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    width: 1.15rem;
+    height: 1.15rem;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+.theme-slider--compact .theme-slider__track { width: 3rem; height: 1.2rem; }
+.theme-slider--compact .theme-slider__thumb { width: 1rem; height: 1rem; }
+.theme-slider--compact .theme-slider__icon { font-size: 0.8rem; }
+ 
+/* telemóvel/tablet: aumenta a área de toque (só na vertical, não afeta a precisão horizontal) */
+@media (pointer: coarse) {
+    .theme-slider__track {
+        box-sizing: content-box;
+        padding: 14px 0;
+        margin: -14px 0;
+        background-clip: content-box;
+    }
+}
  
 .nav-cta {
     font-family: var(--mono);
@@ -595,17 +645,17 @@ section {
 /* ===================== CODE PLAYGROUND (interativo) ===================== */
 .code-playground {
     max-width: 74rem;
-    margin: 1rem auto 3rem;
+    margin: 2rem auto 4.5rem;
     padding: 0 2rem;
 }
 .code-playground__label {
     text-align: center;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.5rem;
 }
 .code-playground__label-word {
     display: inline-block;
     font-family: var(--display);
-    font-size: 1.7rem;
+    font-size: 2.5rem;
     font-weight: 700;
     letter-spacing: -0.01em;
     background: var(--gradient-text);
@@ -616,32 +666,34 @@ section {
 }
 @keyframes labelGlowPulse {
     0%, 100% { filter: drop-shadow(0 0 0px rgba(139, 92, 246, 0)); transform: scale(1); }
-    50% { filter: drop-shadow(0 0 14px rgba(139, 92, 246, 0.55)); transform: scale(1.035); }
+    50% { filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.6)); transform: scale(1.035); }
 }
 .code-playground__label-sub {
     display: block;
     font-family: var(--mono);
-    font-size: 0.85rem;
+    font-size: 1rem;
     color: var(--ink-faint);
-    margin-top: 0.35rem;
+    margin-top: 0.45rem;
 }
 .code-playground__arrow {
     display: flex;
     justify-content: center;
     color: var(--purple);
-    margin-bottom: 0.8rem;
+    margin-bottom: 1rem;
     animation: arrowBounce 1.8s ease-in-out infinite;
 }
+.code-playground__arrow svg { width: 26px; height: 26px; }
 @keyframes arrowBounce {
     0%, 100% { transform: translateY(0); opacity: 0.6; }
     50% { transform: translateY(6px); opacity: 1; }
 }
 .code-playground__box {
     position: relative;
-    height: 22rem;
+    height: 36rem;
     border-radius: var(--radius-lg);
-    border: 1px solid var(--border);
+    border: 1.5px solid var(--border-strong);
     background: var(--gradient-soft);
+    box-shadow: 0 24px 70px rgba(139, 92, 246, 0.2), var(--shadow-lg);
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -660,10 +712,10 @@ section {
     z-index: 1;
     text-align: center;
     pointer-events: none;
-    max-width: 26rem;
+    max-width: 28rem;
     padding: 0 1.5rem;
 }
-.code-playground__text p { color: var(--ink-soft); font-size: 1rem; margin-top: 0.5rem; }
+.code-playground__text p { color: var(--ink-soft); font-size: 1.15rem; margin-top: 0.5rem; }
  
 .code-playground__release {
     display: block;
@@ -826,6 +878,16 @@ article p { font-size: 0.72rem; color: var(--purple); font-weight: 600; font-fam
 .terminal__lines span { display: block; }
 .terminal__code { padding-right: 1.6rem; flex: 1; min-width: 0; }
 .terminal__comment { color: var(--ink-faint); display: block; }
+.terminal__cursor {
+    display: inline-block;
+    width: 0.55em;
+    height: 1em;
+    margin-left: 1px;
+    background: var(--purple);
+    vertical-align: text-bottom;
+    animation: blinkCursor 0.9s step-end infinite;
+}
+@keyframes blinkCursor { 50% { opacity: 0; } }
 .terminal__code .kw { color: var(--purple); }
 .terminal__code .str { color: var(--blue); }
 .terminal__code .punct { color: var(--ink-faint); }
@@ -917,6 +979,7 @@ footer p { margin-top: 1.5rem; color: var(--ink-faint); font-size: 0.85rem; font
 @media screen and (min-width: 1700px) {
     section { max-width: 78rem; }
     .stats, .code-playground { max-width: 78rem; }
+    .code-playground__box { height: 40rem; }
 }
  
 /* Laptops pequenos / tablets grandes */
@@ -936,6 +999,7 @@ footer p { margin-top: 1.5rem; color: var(--ink-faint); font-size: 0.85rem; font
     .title { font-size: 2.1rem; }
     .stats { grid-template-columns: repeat(2, 1fr); }
     section { padding-left: 1.2rem; padding-right: 1.2rem; }
+    .code-playground__box { height: 34rem; }
 }
  
 /* Tablets pequenos / phablets */
@@ -944,6 +1008,7 @@ footer p { margin-top: 1.5rem; color: var(--ink-faint); font-size: 0.85rem; font
     .section__pic-container { height: 18rem; width: 18rem; }
     .about-pic-wrap { max-width: 16rem; }
     .terminal { max-width: 100%; }
+    .code-playground__box { height: 31rem; }
 }
  
 /* Telemóveis (portrait) */
@@ -971,11 +1036,12 @@ footer p { margin-top: 1.5rem; color: var(--ink-faint); font-size: 0.85rem; font
     .stat__num { font-size: 1.7rem; }
  
     .marquee__item { font-size: 0.85rem; }
-    .code-playground { padding: 0 1rem; margin: 0.5rem auto 2rem; }
-    .code-playground__box { height: 20rem; }
-    .code-playground__text p { font-size: 0.88rem; }
-    .code-playground__label-word { font-size: 1.4rem; }
-    .code-playground__release { font-size: 0.78rem; padding: 0.6rem 1.2rem; }
+    .code-playground { padding: 0 1rem; margin: 1rem auto 2.5rem; }
+    .code-playground__box { height: 29rem; }
+    .code-playground__text p { font-size: 1rem; }
+    .code-playground__label-word { font-size: 1.9rem; }
+    .code-playground__label-sub { font-size: 0.85rem; }
+    .code-playground__release { font-size: 0.8rem; padding: 0.65rem 1.3rem; }
  
     .back-to-top { left: 1.2rem; bottom: 1.2rem; width: 2.6rem; height: 2.6rem; font-size: 1rem; }
     .aviso-de-cookies { left: 0.6rem; right: 0.6rem; bottom: 0.6rem; padding: 1.1rem 1.2rem; }
@@ -997,11 +1063,11 @@ footer p { margin-top: 1.5rem; color: var(--ink-faint); font-size: 0.85rem; font
     .terminal__body { font-size: 0.7rem; padding: 1.2rem 0; }
     .loader__mark { font-size: 1.9rem; }
     .loader__bar { width: 9rem; }
-    .code-playground__box { height: 17rem; }
-    .code-playground__text p { font-size: 0.8rem; }
-    .code-playground__label-word { font-size: 1.2rem; }
-    .code-playground__label-sub { font-size: 0.72rem; }
-    .code-playground__release { font-size: 0.72rem; padding: 0.55rem 1.05rem; }
+    .code-playground__box { height: 24rem; }
+    .code-playground__text p { font-size: 0.9rem; }
+    .code-playground__label-word { font-size: 1.6rem; }
+    .code-playground__label-sub { font-size: 0.78rem; }
+    .code-playground__release { font-size: 0.75rem; padding: 0.6rem 1.15rem; }
 }
  
 /* Ecrãs curtos / modo paisagem em telemóveis */
@@ -1009,7 +1075,7 @@ footer p { margin-top: 1.5rem; color: var(--ink-faint); font-size: 0.85rem; font
     #profile { min-height: auto; padding-top: 6.5rem; padding-bottom: 2rem; }
     .section__pic-container { height: 11rem; width: 11rem; }
     section { padding-top: 5rem; }
-    .code-playground__box { height: 12rem; }
-    .code-playground__label-word { font-size: 1.3rem; }
+    .code-playground__box { height: 16rem; }
+    .code-playground__label-word { font-size: 1.5rem; }
     .code-playground__arrow { margin-bottom: 0.4rem; }
 }

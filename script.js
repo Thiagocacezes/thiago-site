@@ -198,24 +198,132 @@ function toggleMenu() {
     icon.classList.toggle("open");
 }
  
-/* ---------- Tema claro / escuro ---------- */
-let currentTheme = 'light';
-const themeToggle = document.getElementById('themeToggle');
-const themeToggleMobile = document.getElementById('themeToggleMobile');
+/* ---------- Slider dia / noite (interpolação contínua, como um volume) ---------- */
+const THEME_DAY = {
+    bg: [246, 247, 252], bgAlt: [238, 240, 251],
+    surface: [255, 255, 255], surfaceAlpha: 0.72,
+    surfaceSolid: [255, 255, 255],
+    border: [97, 90, 199], borderAlpha: 0.16,
+    borderStrong: [97, 90, 199], borderStrongAlpha: 0.32,
+    ink: [17, 19, 43], inkSoft: [88, 92, 130], inkFaint: [130, 133, 171]
+};
+const THEME_NIGHT = {
+    bg: [10, 11, 28], bgAlt: [15, 17, 40],
+    surface: [22, 24, 51], surfaceAlpha: 0.6,
+    surfaceSolid: [20, 22, 47],
+    border: [139, 92, 246], borderAlpha: 0.22,
+    borderStrong: [139, 92, 246], borderStrongAlpha: 0.4,
+    ink: [238, 240, 253], inkSoft: [167, 171, 214], inkFaint: [109, 113, 160]
+};
  
-function applyTheme(theme) {
-    currentTheme = theme;
-    document.body.setAttribute('data-theme', theme);
-    const icon = theme === 'dark' ? '☀️' : '🌙';
-    if (themeToggle) themeToggle.textContent = icon;
-    if (themeToggleMobile) themeToggleMobile.textContent = icon;
+function clamp01(n) { return Math.min(Math.max(n, 0), 1); }
+function lerp(a, b, t) { return a + (b - a) * t; }
+function lerpRgb(a, b, t) { return a.map((c, i) => Math.round(lerp(c, b[i], t))); }
+ 
+function applyThemeValue(t) {
+    t = clamp01(t);
+    const root = document.body.style;
+ 
+    root.setProperty('--bg', `rgb(${lerpRgb(THEME_DAY.bg, THEME_NIGHT.bg, t).join(',')})`);
+    root.setProperty('--bg-alt', `rgb(${lerpRgb(THEME_DAY.bgAlt, THEME_NIGHT.bgAlt, t).join(',')})`);
+    root.setProperty('--surface', `rgba(${lerpRgb(THEME_DAY.surface, THEME_NIGHT.surface, t).join(',')}, ${lerp(THEME_DAY.surfaceAlpha, THEME_NIGHT.surfaceAlpha, t).toFixed(2)})`);
+    root.setProperty('--surface-solid', `rgb(${lerpRgb(THEME_DAY.surfaceSolid, THEME_NIGHT.surfaceSolid, t).join(',')})`);
+    root.setProperty('--border', `rgba(${lerpRgb(THEME_DAY.border, THEME_NIGHT.border, t).join(',')}, ${lerp(THEME_DAY.borderAlpha, THEME_NIGHT.borderAlpha, t).toFixed(2)})`);
+    root.setProperty('--border-strong', `rgba(${lerpRgb(THEME_DAY.borderStrong, THEME_NIGHT.borderStrong, t).join(',')}, ${lerp(THEME_DAY.borderStrongAlpha, THEME_NIGHT.borderStrongAlpha, t).toFixed(2)})`);
+    root.setProperty('--ink', `rgb(${lerpRgb(THEME_DAY.ink, THEME_NIGHT.ink, t).join(',')})`);
+    root.setProperty('--ink-soft', `rgb(${lerpRgb(THEME_DAY.inkSoft, THEME_NIGHT.inkSoft, t).join(',')})`);
+    root.setProperty('--ink-faint', `rgb(${lerpRgb(THEME_DAY.inkFaint, THEME_NIGHT.inkFaint, t).join(',')})`);
+ 
+    /* alterna o estado binário para partes do site que ainda dependem de um on/off
+       (opacidade dos blobs, cor das partículas do canvas) */
+    document.body.setAttribute('data-theme', t > 0.5 ? 'dark' : 'light');
 }
-function toggleTheme() { applyTheme(currentTheme === 'light' ? 'dark' : 'light'); }
-if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
-if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
-if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    applyTheme('dark');
+ 
+let themeValue = 0; // 0 = dia, 1 = noite
+let isDraggingTheme = false;
+let activeThemeTrack = null;
+const themeSliders = document.querySelectorAll('.theme-slider');
+ 
+function valueFromClientX(track, clientX) {
+    const rect = track.getBoundingClientRect();
+    return clamp01((clientX - rect.left) / rect.width);
 }
+ 
+function setSliderVisual(t) {
+    themeSliders.forEach((el) => {
+        const thumb = el.querySelector('.theme-slider__thumb');
+        if (thumb) thumb.style.left = `${t * 100}%`;
+        el.setAttribute('aria-valuenow', String(Math.round(t * 100)));
+    });
+}
+ 
+function setThemeValue(t) {
+    themeValue = clamp01(t);
+    applyThemeValue(themeValue);
+    setSliderVisual(themeValue);
+}
+ 
+function animateThemeTo(target, duration = 450) {
+    const start = themeValue;
+    const startTime = performance.now();
+    function step(now) {
+        const p = Math.min((now - startTime) / duration, 1);
+        const eased = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+        setThemeValue(start + (target - start) * eased);
+        if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+}
+ 
+themeSliders.forEach((el) => {
+    const track = el.querySelector('.theme-slider__track');
+    const sunIcon = el.querySelector('.theme-slider__icon--sun');
+    const moonIcon = el.querySelector('.theme-slider__icon--moon');
+    if (!track) return;
+ 
+    track.addEventListener('mousedown', (e) => {
+        isDraggingTheme = true;
+        activeThemeTrack = track;
+        document.body.classList.add('is-theme-dragging');
+        setThemeValue(valueFromClientX(track, e.clientX));
+        e.preventDefault();
+    });
+    track.addEventListener('touchstart', (e) => {
+        isDraggingTheme = true;
+        activeThemeTrack = track;
+        document.body.classList.add('is-theme-dragging');
+        setThemeValue(valueFromClientX(track, e.touches[0].clientX));
+    }, { passive: true });
+ 
+    if (sunIcon) sunIcon.addEventListener('click', () => animateThemeTo(0));
+    if (moonIcon) moonIcon.addEventListener('click', () => animateThemeTo(1));
+ 
+    el.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { animateThemeTo(Math.max(themeValue - 0.1, 0), 150); e.preventDefault(); }
+        if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { animateThemeTo(Math.min(themeValue + 0.1, 1), 150); e.preventDefault(); }
+        if (e.key === 'Home') { animateThemeTo(0); e.preventDefault(); }
+        if (e.key === 'End') { animateThemeTo(1); e.preventDefault(); }
+    });
+});
+ 
+function endThemeDrag() {
+    isDraggingTheme = false;
+    activeThemeTrack = null;
+    document.body.classList.remove('is-theme-dragging');
+}
+ 
+window.addEventListener('mousemove', (e) => {
+    if (isDraggingTheme && activeThemeTrack) setThemeValue(valueFromClientX(activeThemeTrack, e.clientX));
+});
+window.addEventListener('mouseup', endThemeDrag);
+window.addEventListener('touchmove', (e) => {
+    if (isDraggingTheme && activeThemeTrack && e.touches.length) setThemeValue(valueFromClientX(activeThemeTrack, e.touches[0].clientX));
+}, { passive: true });
+window.addEventListener('touchend', endThemeDrag);
+window.addEventListener('touchcancel', endThemeDrag);
+ 
+/* estado inicial: site abre sempre em modo noite */
+setThemeValue(1);
  
 /* ---------- Barra de progresso + nav com sombra + botão topo ---------- */
 const scrollProgress = document.getElementById('scrollProgress');
@@ -621,6 +729,64 @@ if (escapedCanvas) {
         requestAnimationFrame(animateEscaped);
     }
     animateEscaped();
+}
+ 
+/* ---------- Terminal da Missão: efeito de "a escrever código" ao vivo ---------- */
+const terminalCode = document.querySelector('#missao .terminal__code');
+if (terminalCode) {
+    const lineEls = Array.from(terminalCode.children);
+    const originalHTML = lineEls.map((el) => el.innerHTML);
+    const originalText = lineEls.map((el) => el.textContent);
+ 
+    /* começa vazio; se o JS falhar, o texto estático original nunca chega a ser limpo */
+    lineEls.forEach((el) => { el.textContent = ''; });
+ 
+    const typingCursor = document.createElement('span');
+    typingCursor.className = 'terminal__cursor';
+    if (lineEls[0]) lineEls[0].appendChild(typingCursor);
+ 
+    let hasTyped = false;
+ 
+    function typeTerminal() {
+        if (hasTyped) return;
+        hasTyped = true;
+        let lineIndex = 0;
+        let charIndex = 0;
+ 
+        function typeChar() {
+            if (lineIndex >= lineEls.length) {
+                typingCursor.remove();
+                return;
+            }
+            const el = lineEls[lineIndex];
+            const fullText = originalText[lineIndex];
+ 
+            if (charIndex <= fullText.length) {
+                el.textContent = fullText.slice(0, charIndex);
+                el.appendChild(typingCursor);
+                charIndex++;
+                setTimeout(typeChar, Math.random() * 10 + 7);
+            } else {
+                /* linha terminada: repõe o markup original (com destaque de sintaxe, se houver) */
+                el.innerHTML = originalHTML[lineIndex];
+                lineIndex++;
+                charIndex = 0;
+                setTimeout(typeChar, 110);
+            }
+        }
+        typeChar();
+    }
+ 
+    const terminalEl = document.querySelector('#missao .terminal');
+    const terminalObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                setTimeout(typeTerminal, 450);
+                terminalObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.35 });
+    if (terminalEl) terminalObserver.observe(terminalEl);
 }
  
 /* ---------- Efeito spotlight nos cards ---------- */
