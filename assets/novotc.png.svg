@@ -1,0 +1,12 @@
+<svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ícone tcdigital.pt">
+  <title>tc — ícone tcdigital.pt</title>
+  <defs>
+    <linearGradient id="badgeGrad2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0B4A3D"/>
+      <stop offset="100%" stop-color="#178F6E"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="10" width="220" height="220" rx="50" fill="url(#badgeGrad2)"/>
+  <text x="120" y="152" font-family="'Poppins','Montserrat','Helvetica Neue',Arial,sans-serif" font-size="118" font-weight="700" fill="#F7F9F8" text-anchor="middle" letter-spacing="-2">tc</text>
+  <path d="M 44 178 Q 78 158 120 178 T 196 178" fill="none" stroke="#5FD9BB" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+</svg>
