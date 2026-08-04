@@ -1,23 +1,125 @@
-/* ---------- Loader de entrada ---------- */
+/* ---------- Loader de entrada: terminal inicializando ambiente seguro ---------- */
 const loader = document.getElementById('loader');
 const loaderFill = document.getElementById('loaderFill');
 const loaderPct = document.getElementById('loaderPct');
- 
-(function runLoader() {
-    let progress = 0;
-    const interval = setInterval(() => {
-        progress += Math.random() * 18 + 6;
-        if (progress >= 100) {
-            progress = 100;
-            clearInterval(interval);
-            setTimeout(() => {
-                if (loader) loader.classList.add('is-hidden');
-                document.body.classList.remove('is-loading');
-            }, 250);
+const loaderMsg = document.getElementById('loaderMsg');
+const loaderBadge = document.getElementById('loaderBadge');
+const loaderCode = document.getElementById('loaderCode');
+const loaderLineNumbers = document.getElementById('loaderLineNumbers');
+
+(function runBootTerminal() {
+    if (!loader || !loaderCode) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // cada linha: texto puro (o que é "digitado") + versão com destaque de sintaxe (aplicada ao terminar a linha)
+    const bootLines = [
+        {
+            plain: `import { SecureEnvironment } from "./core";`,
+            html: `<span class="kw">import</span> { SecureEnvironment } <span class="kw">from</span> <span class="str">"./core"</span><span class="punct">;</span>`,
+            status: 'Carregando módulos…'
+        },
+        {
+            plain: `import { Firewall, Cache, DNS } from "./network";`,
+            html: `<span class="kw">import</span> { Firewall, Cache, DNS } <span class="kw">from</span> <span class="str">"./network"</span><span class="punct">;</span>`,
+            status: 'Carregando módulos de rede…'
+        },
+        {
+            plain: `const env = new SecureEnvironment({ mode: "strict" });`,
+            html: `<span class="kw">const</span> env <span class="punct">=</span> <span class="kw">new</span> SecureEnvironment<span class="punct">({</span> mode<span class="punct">:</span> <span class="str">"strict"</span> <span class="punct">});</span>`,
+            status: 'Preparando ambiente…'
+        },
+        {
+            plain: `await env.handshake();                 // TLS 1.3 ✓`,
+            html: `<span class="kw">await</span> env.handshake<span class="punct">();</span>                 <span class="terminal__comment" style="display:inline">// TLS 1.3 ✓</span>`,
+            status: 'Estabelecendo conexão segura…'
+        },
+        {
+            plain: `await env.verifyCertificate();         // válido ✓`,
+            html: `<span class="kw">await</span> env.verifyCertificate<span class="punct">();</span>         <span class="terminal__comment" style="display:inline">// válido ✓</span>`,
+            status: 'Verificando certificado SSL…'
+        },
+        {
+            plain: `await env.sandbox();                   // isolado ✓`,
+            html: `<span class="kw">await</span> env.sandbox<span class="punct">();</span>                   <span class="terminal__comment" style="display:inline">// isolado ✓</span>`,
+            status: 'Isolando ambiente de execução…'
+        },
+        {
+            plain: `await env.preloadAssets();             // 100% ✓`,
+            html: `<span class="kw">await</span> env.preloadAssets<span class="punct">();</span>             <span class="terminal__comment" style="display:inline">// 100% ✓</span>`,
+            status: 'Carregando recursos…'
+        },
+        {
+            plain: `console.log("Ambiente seguro. Bem-vindo(a).");`,
+            html: `console.<span class="kw">log</span><span class="punct">(</span><span class="str">"Ambiente seguro. Bem-vindo(a)."</span><span class="punct">);</span>`,
+            status: 'Pronto.'
+        },
+    ];
+
+    const totalChars = bootLines.reduce((sum, l) => sum + l.plain.length, 0);
+    let typedChars = 0;
+
+    function updateProgress(extra = 0) {
+        const pct = Math.min(100, Math.round(((typedChars + extra) / totalChars) * 100));
+        if (loaderFill) loaderFill.style.width = `${pct}%`;
+        if (loaderPct) loaderPct.textContent = `${pct}%`;
+    }
+
+    function finishBoot() {
+        if (loaderBadge) loaderBadge.textContent = 'seguro ✓';
+        if (loaderMsg) loaderMsg.textContent = 'Ambiente pronto';
+        setTimeout(() => {
+            if (loader) loader.classList.add('is-hidden');
+            document.body.classList.remove('is-loading');
+        }, 2450);
+    }
+
+    if (reduceMotion) {
+        // sem animação: monta tudo de uma vez e libera o site rapidamente
+        loaderCode.innerHTML = bootLines.map(l => `<span>${l.html}</span>`).join('');
+        loaderLineNumbers.innerHTML = bootLines.map((_, i) => `<span>${i + 1}</span>`).join('');
+        updateProgress(totalChars);
+        setTimeout(finishBoot, 400);
+        return;
+    }
+
+    function typeLine(index) {
+        if (index >= bootLines.length) {
+            finishBoot();
+            return;
         }
-        if (loaderFill) loaderFill.style.width = `${progress}%`;
-        if (loaderPct) loaderPct.textContent = `${Math.floor(progress)}%`;
-    }, 140);
+
+        const line = bootLines[index];
+        if (loaderMsg) loaderMsg.textContent = line.status;
+        if (loaderLineNumbers) loaderLineNumbers.insertAdjacentHTML('beforeend', `<span>${index + 1}</span>`);
+
+        const lineEl = document.createElement('span');
+        lineEl.style.display = 'block';
+        const cursorEl = document.createElement('span');
+        cursorEl.className = 'terminal__cursor';
+        lineEl.appendChild(cursorEl);
+        loaderCode.appendChild(lineEl);
+
+        let charIndex = 0;
+        const speed = 0;
+
+        function typeChar() {
+            if (charIndex < line.plain.length) {
+                cursorEl.insertAdjacentText('beforebegin', line.plain[charIndex]);
+                charIndex++;
+                typedChars++;
+                updateProgress();
+                setTimeout(typeChar, speed + Math.random() * 3);
+            } else {
+                // linha completa: aplica destaque de sintaxe e segue para a próxima
+                lineEl.innerHTML = line.html;
+                setTimeout(() => typeLine(index + 1), 25);
+            }
+        }
+        typeChar();
+    }
+
+    setTimeout(() => typeLine(0), 150);
 })();
  
 /* ---------- Cursor customizado ---------- */
